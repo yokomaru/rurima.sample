@@ -1,0 +1,101 @@
+:root {
+  color: #222;
+  background: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.top-page {
+  width: min(100%, 720px);
+  margin: 0 auto;
+  padding: 96px 24px;
+}
+
+.hero {
+  text-align: center;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 7vw, 3.5rem);
+  font-weight: 700;
+}
+
+.hero h1 span {
+  font-size: 0.5em;
+  white-space: nowrap;
+}
+
+.hero p {
+  width: fit-content;
+  max-width: 100%;
+  margin: 40px auto 0;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.hero .note {
+  margin-top: 16px;
+  font-size: 0.9rem;
+}
+
+.draw-section {
+  margin: 56px 0;
+  text-align: center;
+}
+
+#draw-button {
+  padding: 18px 36px;
+  color: inherit;
+  background: #fff;
+  border: 2px solid currentColor;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+#draw-button:hover {
+  background: #f3f3f3;
+}
+
+.history-section {
+  max-width: 480px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid #bbb;
+  text-align: center;
+}
+
+.history-section h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+#method-result {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid #bbb;
+}
+
+#method-result h2 {
+  text-align: center;
+}
+
+#method-result dd {
+  margin: 0 0 16px;
+}
+
+#example {
+  overflow-x: auto;
+  padding: 16px;
+  background: #f3f3f3;
+}

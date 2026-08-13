@@ -4,31 +4,50 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>るりまガチャ</title>
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <h1>るりまガチャ</h1>
-    <button type="button" id="draw-button">ガチャを引く</button>
-    <section id="method-result" hidden>
-      <h2 id="method-name"></h2>
-      <dl>
-        <dt>Rubyバージョン</dt>
-        <dd id="ruby-version"></dd>
-        <dt>ライブラリ</dt>
-        <dd id="source-library"></dd>
-        <dt>クラス・モジュール</dt>
-        <dd id="class-name"></dd>
-        <dt>種別</dt>
-        <dd id="method-kind"></dd>
-        <dt>シグネチャ</dt>
-        <dd id="signatures"></dd>
-        <dt>説明</dt>
-        <dd id="description"></dd>
-        <dt>使用例</dt>
-        <dd><pre id="example"></pre></dd>
-        <dt>るりまURL</dt>
-        <dd><a id="rurema-url" target="_blank" rel="noreferrer"></a></dd>
-      </dl>
-    </section>
+    <main class="top-page">
+      <header class="hero">
+        <h1>るりまガチャ <span>Ruby 4.0</span></h1>
+        <p>
+          Rubyリファレンスマニュアル（通称るりま）から<br>
+          ランダムにメソッドを表示します。<br>
+          知らなかった便利なメソッドに出会えるかも
+        </p>
+        <p class="note">※ Ruby本体に組み込まれ、requireなしで使えるクラス・モジュールのメソッドから選ばれます</p>
+      </header>
+
+      <section class="draw-section" aria-label="ガチャ">
+        <button type="button" id="draw-button">ガチャを引く</button>
+      </section>
+
+      <section class="history-section" aria-labelledby="history-title">
+        <h2 id="history-title">ガチャ履歴</h2>
+      </section>
+
+      <section id="method-result" hidden>
+        <h2 id="method-name"></h2>
+        <dl>
+          <dt>Rubyバージョン</dt>
+          <dd id="ruby-version"></dd>
+          <dt>ライブラリ</dt>
+          <dd id="source-library"></dd>
+          <dt>クラス・モジュール</dt>
+          <dd id="class-name"></dd>
+          <dt>種別</dt>
+          <dd id="method-kind"></dd>
+          <dt>シグネチャ</dt>
+          <dd id="signatures"></dd>
+          <dt>説明</dt>
+          <dd id="description"></dd>
+          <dt>使用例</dt>
+          <dd><pre id="example"></pre></dd>
+          <dt>るりまURL</dt>
+          <dd><a id="rurema-url" target="_blank" rel="noreferrer"></a></dd>
+        </dl>
+      </section>
+    </main>
     <script type="module" src="js/main.js"></script>
   </body>
 </html>
