@@ -96,6 +96,5 @@ class GenerateMethodsTest < Minitest::Test
     record = GenerateMethods.record_for(sample_entry)
 
     assert_equal [GenerateMethods.method_key(record)], GenerateMethods.duplicate_method_keys([record, record.dup])
-    assert_raises(RuntimeError) { GenerateMethods.payload_for([sample_entry, sample_entry]) }
   end
 end

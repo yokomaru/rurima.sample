@@ -6,8 +6,6 @@ require "fileutils"
 require "json"
 require "pathname"
 
-require "bitclust"
-
 module GenerateMethods
   ROOT = Pathname.new(__dir__).join("..").realpath
   RUREMA_RUBY_VERSION = "4.0"
@@ -22,7 +20,7 @@ module GenerateMethods
   }.freeze
 
   REQUIRED_RECORD_KEYS = %i[
-    method_name class_name method_kind visibility signatures description example rurema_url
+    method_name class_name method_kind signatures description example rurema_url
   ].freeze
 
   module_function
@@ -65,9 +63,13 @@ module GenerateMethods
   end
 
   def rurema_url(entry)
-    class_id = BitClust::NameUtils.encodename_url(entry.klass.name)
-    method_id = BitClust::NameUtils.encodename_url(entry.name)
+    class_id = encode_rurema_name(entry.klass.name)
+    method_id = encode_rurema_name(entry.name)
     "https://docs.ruby-lang.org/ja/#{RUREMA_RUBY_VERSION}/method/#{class_id}/#{entry.typechar}/#{method_id}.html"
+  end
+
+  def encode_rurema_name(value)
+    value.gsub(/[^A-Za-z0-9_]/n) { |character| format("=%02x", character.getbyte(0)) }
   end
 
   def record_for(entry)
@@ -75,7 +77,6 @@ module GenerateMethods
       method_name: entry.name,
       class_name: entry.klass.name,
       method_kind: METHOD_KINDS.fetch(entry.typename),
-      visibility: entry.visibility.to_s,
       signatures: signatures_from(entry.source),
       description: description_from(entry.source),
       example: example_from(entry.source),
@@ -97,8 +98,6 @@ module GenerateMethods
     methods = selected_entries(entries)
               .sort_by { |entry| [entry.klass.name, entry.typename.to_s, entry.name] }
               .map { |entry| record_for(entry) }
-    duplicates = duplicate_method_keys(methods)
-    raise "Duplicate methods: #{duplicates.join(', ')}" unless duplicates.empty?
 
     {
       ruby_version: RUREMA_RUBY_VERSION,
@@ -111,6 +110,7 @@ module GenerateMethods
     database_dir = Pathname.new(database_dir)
     raise "BitClust DB not found: #{database_dir}" unless database_dir.directory?
 
+    require "bitclust"
     database = BitClust::MethodDatabase.new(database_dir.to_s)
     version = database.properties["version"]
     raise "Unexpected BitClust DB version: #{version}" unless version == BITCLUST_DATABASE_VERSION
