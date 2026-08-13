@@ -132,11 +132,15 @@ a { color: inherit; }
 }
 
 .terminal-title::before {
-  margin-right: 16px;
-  color: #ff617b;
-  content: "●  ●  ●";
-  letter-spacing: 2px;
-  text-shadow: 17px 0 #ffd252, 34px 0 #72df82;
+  display: inline-block;
+  width: 0.75em;
+  height: 0.75em;
+  margin-right: 4rem;
+  border-radius: 50%;
+  vertical-align: -0.02em;
+  background: #ff617b;
+  box-shadow: 1.45rem 0 #ffd252, 2.9rem 0 #72df82;
+  content: "";
 }
 
 .terminal-command {
