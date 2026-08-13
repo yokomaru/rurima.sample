@@ -5,9 +5,8 @@ const HISTORY_STORAGE_KEY = "rurima-gacha-history";
 const HISTORY_LIMIT = 3;
 
 const drawButton = document.querySelector("#draw-button");
-const drawAgainButton = document.querySelector("#draw-again-button");
-const topScreen = document.querySelector("#top-screen");
-const resultScreen = document.querySelector("#result-screen");
+const terminalIdle = document.querySelector("#terminal-idle");
+const terminalResult = document.querySelector("#terminal-result");
 const methodName = document.querySelector("#method-name");
 const description = document.querySelector("#description");
 const example = document.querySelector("#example");
@@ -18,7 +17,6 @@ let history = loadHistory();
 
 function methodLabel(method) {
   const separator = method.method_kind === "instance_method" ? "#" : ".";
-
   return `${method.class_name}${separator}${method.method_name}`;
 }
 
@@ -60,11 +58,11 @@ function showResult(method) {
   description.textContent = method.description ?? "説明なし";
   example.textContent = method.example ?? "使用例なし";
   ruremaUrl.href = method.rurema_url;
-  topScreen.hidden = true;
-  resultScreen.hidden = false;
+  terminalIdle.hidden = true;
+  terminalResult.hidden = false;
 }
 
-function drawMethod() {
+function executeSample() {
   const randomIndex = Math.floor(Math.random() * methodsData.methods.length);
   const selectedMethod = methodsData.methods[randomIndex];
 
@@ -73,5 +71,4 @@ function drawMethod() {
 }
 
 renderHistory();
-drawButton.addEventListener("click", drawMethod);
-drawAgainButton.addEventListener("click", drawMethod);
+drawButton.addEventListener("click", executeSample);

@@ -3,45 +3,56 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>るりまガチャ</title>
+    <title>rurima.sample</title>
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <main class="top-page">
-      <section id="top-screen">
-        <header class="hero">
-          <h1>るりまガチャ <span>Ruby 4.0</span></h1>
-          <p>
-            Rubyリファレンスマニュアル（通称るりま）から<br>
-            ランダムにメソッドを表示します。<br>
-            知らなかった便利なメソッドに出会えるかも
-          </p>
-          <p class="note">※ Ruby本体に組み込まれ、requireなしで使えるクラス・モジュールのメソッドから選ばれます</p>
-        </header>
+    <main class="app-shell">
+      <header class="hero">
+        <h1><span>rurima.</span><strong>sample</strong></h1>
+        <p class="service-version">Ruby 4.0 💎</p>
+        <button type="button" id="draw-button">▶　実行する</button>
+      </header>
 
-        <section class="draw-section" aria-label="ガチャ">
-          <button type="button" id="draw-button">ガチャを引く</button>
+      <div class="workspace">
+        <section class="terminal-panel" aria-label="rurima terminal">
+          <p class="terminal-title">rurima terminal</p>
+
+          <div id="terminal-idle">
+            <p class="terminal-command">&gt; rurima.sample</p>
+            <p class="terminal-comment"># 実行するボタンを押すと、ここに結果が表示されます</p>
+            <p class="terminal-cursor">&gt; <span aria-hidden="true">_</span></p>
+          </div>
+
+          <div id="terminal-result" hidden aria-live="polite">
+            <p class="terminal-command">&gt; rurima.sample</p>
+            <p class="terminal-output">=&gt; <strong id="method-name"></strong></p>
+            <p id="description" class="method-description"></p>
+            <pre id="example"></pre>
+            <a id="rurema-url" target="_blank" rel="noreferrer">↗　るりまで詳しく見る</a>
+          </div>
         </section>
 
-        <p class="attribution">
-          このサイトのメソッドデータは、<a href="https://docs.ruby-lang.org/ja/4.0/" target="_blank" rel="noreferrer">Rubyリファレンスマニュアル（るりま）</a>をもとにしています。<br>
-          <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noreferrer">CC BY 3.0</a> / 一部加工あり
-        </p>
-      </section>
+        <aside class="sidebar" aria-label="履歴とサービスについて">
+          <section class="history-panel" aria-labelledby="history-title">
+            <h2 id="history-title">history</h2>
+            <ul id="history-list"></ul>
+          </section>
 
-      <section id="result-screen" hidden aria-labelledby="method-name">
-        <p class="result-label">今日のメソッド</p>
-        <h2 id="method-name"></h2>
-        <p id="description"></p>
-        <pre id="example"></pre>
-        <p><a id="rurema-url" target="_blank" rel="noreferrer">るりまで詳しく見る</a></p>
-        <button type="button" id="draw-again-button">もう一度引く</button>
-      </section>
+          <section class="service-note" aria-label="サービスについて">
+            <p>
+              Rubyリファレンスマニュアル（通称るりま）から<br>
+              <em>ランダムに1つのメソッド</em>を表示します。
+            </p>
+            <p>Ruby本体に組み込まれ、<br>requireなしで使えるクラス・モジュールのメソッドから選ばれます。</p>
+          </section>
+        </aside>
+      </div>
 
-      <section class="history-section" aria-labelledby="history-title">
-        <h2 id="history-title">ガチャ履歴</h2>
-        <ul id="history-list"></ul>
-      </section>
+      <p class="attribution">
+        このサイトのメソッドデータは、<a href="https://docs.ruby-lang.org/ja/4.0/" target="_blank" rel="noreferrer">Rubyリファレンスマニュアル（るりま）</a>をもとにしています。<br>
+        <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noreferrer">CC BY 3.0</a> / 一部加工あり
+      </p>
     </main>
     <script type="module" src="js/main.js"></script>
   </body>
