@@ -80,22 +80,43 @@ body {
   font-weight: 400;
 }
 
-#method-result {
-  margin-top: 56px;
-  padding-top: 32px;
-  border-top: 1px solid #bbb;
-}
-
-#method-result h2 {
+#result-screen {
+  max-width: 560px;
+  margin: 0 auto;
   text-align: center;
 }
 
-#method-result dd {
-  margin: 0 0 16px;
+.result-label {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+#method-name {
+  margin: 40px 0;
+  font-size: clamp(2rem, 7vw, 3.5rem);
+}
+
+#description {
+  margin: 0;
+  text-align: left;
+  line-height: 1.6;
 }
 
 #example {
+  width: 100%;
+  margin: 32px 0;
   overflow-x: auto;
   padding: 16px;
+  text-align: left;
   background: #f3f3f3;
+}
+
+#draw-again-button {
+  padding: 8px 0;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  font: inherit;
+  cursor: pointer;
 }
