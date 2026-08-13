@@ -8,7 +8,27 @@
   <body>
     <h1>るりまガチャ</h1>
     <button type="button" id="draw-button">ガチャを引く</button>
-    <p id="method-name"></p>
+    <section id="method-result" hidden>
+      <h2 id="method-name"></h2>
+      <dl>
+        <dt>Rubyバージョン</dt>
+        <dd id="ruby-version"></dd>
+        <dt>ライブラリ</dt>
+        <dd id="source-library"></dd>
+        <dt>クラス・モジュール</dt>
+        <dd id="class-name"></dd>
+        <dt>種別</dt>
+        <dd id="method-kind"></dd>
+        <dt>シグネチャ</dt>
+        <dd id="signatures"></dd>
+        <dt>説明</dt>
+        <dd id="description"></dd>
+        <dt>使用例</dt>
+        <dd><pre id="example"></pre></dd>
+        <dt>るりまURL</dt>
+        <dd><a id="rurema-url" target="_blank" rel="noreferrer"></a></dd>
+      </dl>
+    </section>
     <script type="module" src="js/main.js"></script>
   </body>
 </html>
