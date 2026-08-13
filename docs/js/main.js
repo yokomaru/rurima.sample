@@ -6,6 +6,7 @@ const HISTORY_LIMIT = 3;
 
 const drawButton = document.querySelector("#draw-button");
 const terminalIdle = document.querySelector("#terminal-idle");
+const terminalLoading = document.querySelector("#terminal-loading");
 const terminalResult = document.querySelector("#terminal-result");
 const methodName = document.querySelector("#method-name");
 const description = document.querySelector("#description");
@@ -14,8 +15,12 @@ const exampleContainer = document.querySelector(".example-container");
 const toggleExample = document.querySelector("#toggle-example");
 const ruremaUrl = document.querySelector("#rurema-url");
 const historyList = document.querySelector("#history-list");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const SAMPLING_DELAY = prefersReducedMotion ? 0 : 700;
+const RESULT_REVEAL_DELAY = prefersReducedMotion ? 0 : 300;
 
 let history = loadHistory();
+let isSampling = false;
 
 function methodLabel(method) {
   const separator = method.method_kind === "instance_method" ? "#" : ".";
@@ -41,7 +46,9 @@ function renderHistory() {
 
     button.type = "button";
     button.textContent = methodLabel(method);
-    button.addEventListener("click", () => showResult(method));
+    button.addEventListener("click", () => {
+      if (!isSampling) showResult(method);
+    });
     item.append(button);
     return item;
   });
@@ -66,9 +73,12 @@ function showResult(method) {
   toggleExample.setAttribute("aria-expanded", "false");
   ruremaUrl.href = method.rurema_url;
   terminalIdle.hidden = true;
+  terminalLoading.hidden = true;
   terminalResult.hidden = false;
+  terminalResult.classList.remove("is-revealing");
 
   requestAnimationFrame(() => {
+    terminalResult.classList.add("is-revealing");
     const isLongExample = example.scrollHeight > example.clientHeight;
     exampleContainer.classList.toggle("is-collapsed", isLongExample);
     toggleExample.hidden = !isLongExample;
@@ -83,11 +93,26 @@ function toggleExampleVisibility() {
 }
 
 function executeSample() {
+  if (isSampling) return;
+
   const randomIndex = Math.floor(Math.random() * methodsData.methods.length);
   const selectedMethod = methodsData.methods[randomIndex];
 
-  saveToHistory(selectedMethod);
-  showResult(selectedMethod);
+  isSampling = true;
+  drawButton.disabled = true;
+  terminalIdle.hidden = true;
+  terminalResult.hidden = true;
+  terminalLoading.hidden = false;
+
+  window.setTimeout(() => {
+    saveToHistory(selectedMethod);
+    showResult(selectedMethod);
+
+    window.setTimeout(() => {
+      isSampling = false;
+      drawButton.disabled = false;
+    }, RESULT_REVEAL_DELAY);
+  }, SAMPLING_DELAY);
 }
 
 renderHistory();
