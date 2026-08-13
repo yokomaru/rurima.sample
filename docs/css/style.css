@@ -175,11 +175,29 @@ a { color: inherit; }
   line-height: 1.7;
 }
 
+.example-container {
+  position: relative;
+  margin: 20px 0;
+}
+
+.example-container.is-collapsed::after {
+  position: absolute;
+  right: 1px;
+  bottom: 30px;
+  left: 1px;
+  height: 5rem;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, rgb(4 8 15 / 96%));
+  content: "";
+}
+
 #example {
   width: 100%;
-  margin: 20px 0;
+  max-height: calc(7 * 1.65em + 28px);
+  margin: 0;
   padding: 14px;
   overflow-x: auto;
+  overflow-y: hidden;
   color: #9beff3;
   background: rgb(4 8 15 / 62%);
   border: 1px solid rgb(93 119 157 / 35%);
@@ -190,6 +208,30 @@ a { color: inherit; }
 }
 
 #example::before { color: #ff7398; content: "irb(main):001> "; }
+
+#example.is-expanded { max-height: none; }
+
+#toggle-example:not([hidden]) {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin: 10px auto 0;
+  padding: 7px 14px;
+  border: 1px solid rgb(66 232 245 / 55%);
+  border-radius: 5px;
+  color: #f4f7fb;
+  background: rgb(13 19 32 / 94%);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.example-container.is-collapsed #toggle-example:not([hidden]) { margin-top: -18px; }
+
+#toggle-example:hover {
+  border-color: #42e8f5;
+  color: #42e8f5;
+}
 
 #rurema-url {
   display: inline-block;

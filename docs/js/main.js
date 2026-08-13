@@ -10,6 +10,8 @@ const terminalResult = document.querySelector("#terminal-result");
 const methodName = document.querySelector("#method-name");
 const description = document.querySelector("#description");
 const example = document.querySelector("#example");
+const exampleContainer = document.querySelector(".example-container");
+const toggleExample = document.querySelector("#toggle-example");
 const ruremaUrl = document.querySelector("#rurema-url");
 const historyList = document.querySelector("#history-list");
 
@@ -57,9 +59,27 @@ function showResult(method) {
   methodName.textContent = methodLabel(method);
   description.textContent = method.description ?? "説明なし";
   example.textContent = method.example ?? "使用例なし";
+  example.classList.remove("is-expanded");
+  exampleContainer.classList.remove("is-collapsed");
+  toggleExample.hidden = true;
+  toggleExample.textContent = "… 続きを表示 ▼";
+  toggleExample.setAttribute("aria-expanded", "false");
   ruremaUrl.href = method.rurema_url;
   terminalIdle.hidden = true;
   terminalResult.hidden = false;
+
+  requestAnimationFrame(() => {
+    const isLongExample = example.scrollHeight > example.clientHeight;
+    exampleContainer.classList.toggle("is-collapsed", isLongExample);
+    toggleExample.hidden = !isLongExample;
+  });
+}
+
+function toggleExampleVisibility() {
+  const isExpanded = example.classList.toggle("is-expanded");
+  exampleContainer.classList.toggle("is-collapsed", !isExpanded);
+  toggleExample.textContent = isExpanded ? "▲ 折りたたむ" : "… 続きを表示 ▼";
+  toggleExample.setAttribute("aria-expanded", String(isExpanded));
 }
 
 function executeSample() {
@@ -72,3 +92,4 @@ function executeSample() {
 
 renderHistory();
 drawButton.addEventListener("click", executeSample);
+toggleExample.addEventListener("click", toggleExampleVisibility);
