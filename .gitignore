@@ -1,0 +1,19 @@
+/vendor/bundle/
+/.bundle/
+
+
+# Ignore bundler config.
+/.bundle
+
+# Ignore all environment files.
+/.env*
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Generated locally from rurema/doctree; never commit these sources or the DB.
+/tmp/doctree/
+/tmp/bitclust-db-4.0/
