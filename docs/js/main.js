@@ -32,6 +32,12 @@ const methodsData = {
   ]
 };
 
-const selectedMethod = methodsData.methods[0];
+const drawButton = document.querySelector("#draw-button");
+const methodName = document.querySelector("#method-name");
 
-console.log(selectedMethod);
+drawButton.addEventListener("click", () => {
+  const randomIndex = Math.floor(Math.random() * methodsData.methods.length);
+  const selectedMethod = methodsData.methods[randomIndex];
+
+  methodName.textContent = selectedMethod.method_name;
+});
