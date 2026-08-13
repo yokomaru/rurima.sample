@@ -1,0 +1,46 @@
+GIT
+  remote: https://github.com/rurema/bitclust.git
+  revision: 873003e8eee58ef85ab4ce9aad0ebdab590f3a9a
+  specs:
+    bitclust-core (1.6.1)
+      drb
+      json
+      nkf
+      progressbar (>= 1.9.0, < 2.0)
+      rack
+      rouge
+      webrick
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    drb (2.2.3)
+    json (2.21.2)
+    nkf (0.3.0)
+    progressbar (1.13.0)
+    rack (3.2.6)
+    rouge (5.1.0)
+      strscan (~> 3.1)
+    strscan (3.1.8)
+    webrick (1.9.2)
+
+PLATFORMS
+  arm64-darwin-25
+  ruby
+
+DEPENDENCIES
+  bitclust-core!
+
+CHECKSUMS
+  bitclust-core (1.6.1)
+  drb (2.2.3) sha256=0b00d6fdb50995fe4a45dea13663493c841112e4068656854646f418fda13373
+  json (2.21.2) sha256=1f1d3b7cf2b3ba1a69beca0bb6db13d5438b80bff3cd54cdaaa620b9b07c1c6a
+  nkf (0.3.0) sha256=357a8dbeba38b727b75930f665146546076a394a1c243faf634ff176e3588895
+  progressbar (1.13.0) sha256=18c921d1c527dbe7eba3c5a07a1e3bcdd5e42fc18276f5711187a7489448be78
+  rack (3.2.6) sha256=5ed78e1f73b2e25679bec7d45ee2d4483cc4146eb1be0264fc4d94cb5ef212c2
+  rouge (5.1.0) sha256=b77c632842ab7f5147940212f0345808cccfbce864fd5b631d7d12a35ac85452
+  strscan (3.1.8) sha256=aae2db611a225559f21ffbb71765c9a4e60fd262534a9ea84f4f11c7f32f679e
+  webrick (1.9.2) sha256=beb4a15fc474defed24a3bda4ffd88a490d517c9e4e6118c3edce59e45864131
+
+BUNDLED WITH
+  4.0.10
