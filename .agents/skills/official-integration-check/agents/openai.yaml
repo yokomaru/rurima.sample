@@ -1,0 +1,4 @@
+interface:
+  display_name: "公式連携の確認"
+  short_description: "外部ライブラリやAPIを公式手順と現行仕様で安全に実装するための確認"
+  default_prompt: "Use $official-integration-check to implement this external integration."
