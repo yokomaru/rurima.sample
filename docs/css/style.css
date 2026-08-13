@@ -162,6 +162,7 @@ a { color: inherit; }
   margin: 14px 0 22px;
   color: #c879ff;
   font-size: clamp(1.35rem, 3vw, 2rem);
+  overflow-wrap: anywhere;
 }
 
 .terminal-output strong { color: #ff5a8b; }
