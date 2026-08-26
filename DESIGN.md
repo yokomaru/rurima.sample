@@ -1,23 +1,23 @@
 # DESIGN.md
 
-## rurima.sample
+## Rurima.sample
 
 Rubyリファレンスマニュアル（通称るりま）から、ランダムに1つのRubyメソッドを表示する。
 
-Rubyの `sample` メソッドのように、**`rurima.sample` を実行するたびに1つのメソッドと出会える**体験をコンセプトとする。
+Rubyの `sample` メソッドのように、**`Rurima.sample` を実行するたびに1つのメソッドと出会える**体験をコンセプトとする。
 
 画面はブラウザのコンソール / ターミナルをモチーフとし、ページ遷移は行わない。
 
 `実行する` を押すたびに、同じTerminal領域の出力結果だけが新しいメソッドへ入れ替わる。
 
 ```text
-> rurima.sample
+> Rurima.sample
 => Array#sample
 
-> rurima.sample
+> Rurima.sample
 => Hash#clear
 
-> rurima.sample
+> Rurima.sample
 => Method#name
 ```
 
@@ -53,14 +53,14 @@ Rubyの技術ドキュメントを読むだけではなく、**知らないRuby�
 PCをメインとした横長レイアウト。
 
 ```text
-                  rurima.sample
+                  Rurima.sample
                     Ruby 4.0 💎
                  [ ▶ 実行する ]
 
 ┌──────────────────────────────┐  ┌─────────────┐
 │ ● ● ●  rurima terminal      │  │ history     │
 │                              │  │ 01 ...      │
-│ > rurima.sample              │  │ 02 ...      │
+│ > Rurima.sample              │  │ 02 ...      │
 │ => Array#sample              │  │ 03 ...      │
 │                              │  └─────────────┘
 │ 説明 / サンプルコード         │  ┌─────────────┐
@@ -140,7 +140,7 @@ Terminal内は等幅フォントを基本とし、ブラウザコンソールや
 ### Title
 
 ```text
-rurima.sample
+Rurima.sample
 ```
 
 * `rurima.`：Primary
@@ -207,7 +207,7 @@ Rubyのコードを実行する感覚を持たせるため、「引く」「抽�
 まだ実行していない状態。
 
 ```text
-> rurima.sample
+> Rurima.sample
 
 # 実行するボタンを押すと、ここに結果が表示されます
 
@@ -215,7 +215,7 @@ Rubyのコードを実行する感覚を持たせるため、「引く」「抽�
 ```
 
 * `>`：Ruby Pink
-* `rurima.sample`：Cyan
+* `Rurima.sample`：Cyan
 * コメント：Muted
 
 ---
@@ -223,7 +223,7 @@ Rubyのコードを実行する感覚を持たせるため、「引く」「抽�
 ### Result
 
 ```text
-> rurima.sample
+> Rurima.sample
 => Array#sample
 ```
 
@@ -293,21 +293,21 @@ Terminal下部のアクションは最小限にする。
 同じTerminalの出力だけを更新する。
 
 ```text
-> rurima.sample
+> Rurima.sample
 => Array#sample
 ```
 
 ↓
 
 ```text
-> rurima.sample
+> Rurima.sample
 => Hash#clear
 ```
 
 ↓
 
 ```text
-> rurima.sample
+> Rurima.sample
 => String#delete
 ```
 
@@ -447,7 +447,7 @@ About
 実装時は以下を優先する。
 
 1. **1画面内で完結する**
-2. **`rurima.sample` を実行する感覚をUI全体で表現する**
+2. **`Rurima.sample` を実行する感覚をUI全体で表現する**
 3. **実行するたびにTerminalの中身だけが入れ替わる**
 4. **「実行する」を唯一の主要CTAにする**
 5. **Terminal / Consoleらしさを画面の中心にする**
@@ -465,7 +465,7 @@ About
 Rubyで配列からランダムに1つ取り出すように、
 
 ```ruby
-rurima.sample
+Rurima.sample
 #=> Array#sample
 ```
 
