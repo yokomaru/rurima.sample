@@ -24,6 +24,11 @@ const toggleExample = document.querySelector("#toggle-example");
 const ruremaUrl = document.querySelector("#rurema-url");
 const historyList = document.querySelector("#history-list");
 const classChipList = document.querySelector(".class-chip-list");
+const selectedClassCount = document.querySelector("#selected-class-count");
+const selectedClassSummary = document.querySelector("#selected-class-summary");
+const classSelectorDialog = document.querySelector("#class-selector-dialog");
+const openClassSelectorButton = document.querySelector("#open-class-selector");
+const closeClassSelectorButton = document.querySelector("#close-class-selector");
 const selectAllClassesButton = document.querySelector("#select-all-classes");
 const resetClassSelectionButton = document.querySelector("#reset-class-selection");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -71,7 +76,17 @@ function renderClassSelection() {
   });
 
   classChipList.replaceChildren(...chips);
+  renderClassSelectionSummary();
   drawButton.disabled = selectedClassNames.size === 0 || isSampling;
+}
+
+function renderClassSelectionSummary() {
+  const selectedClassNamesForDisplay = selectableClassNames.filter((className) => selectedClassNames.has(className));
+
+  selectedClassCount.textContent = `${selectedClassNamesForDisplay.length}件選択中`;
+  selectedClassSummary.textContent = selectedClassNamesForDisplay.length > 0
+    ? selectedClassNamesForDisplay.join(" / ")
+    : "対象を選択してください";
 }
 
 function toggleClassSelection(className) {
@@ -210,5 +225,7 @@ renderClassSelection();
 renderHistory();
 drawButton.addEventListener("click", executeSample);
 toggleExample.addEventListener("click", toggleExampleVisibility);
+openClassSelectorButton.addEventListener("click", () => classSelectorDialog.showModal());
+closeClassSelectorButton.addEventListener("click", () => classSelectorDialog.close());
 selectAllClassesButton.addEventListener("click", selectAllClasses);
 resetClassSelectionButton.addEventListener("click", resetClassSelection);
