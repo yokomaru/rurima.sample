@@ -14,6 +14,28 @@
         <button type="button" id="draw-button">▶　実行する</button>
       </header>
 
+      <section class="class-selector" aria-labelledby="class-selector-title">
+        <div class="class-selector-header">
+          <div>
+            <h2 id="class-selector-title">対象を選ぶ</h2>
+            <p>クラス・モジュールを複数選択できます</p>
+          </div>
+          <div class="class-selector-actions">
+            <button type="button" id="select-all-classes">すべて選択</button>
+            <button type="button" id="reset-class-selection">デフォルトに戻す</button>
+          </div>
+        </div>
+        <div class="class-chip-list" aria-label="抽選対象のクラス・モジュール">
+          <button type="button" class="class-chip is-selected" data-class-name="Array" aria-pressed="true">Array</button>
+          <button type="button" class="class-chip is-selected" data-class-name="Hash" aria-pressed="true">Hash</button>
+          <button type="button" class="class-chip is-selected" data-class-name="String" aria-pressed="true">String</button>
+          <button type="button" class="class-chip is-selected" data-class-name="Integer" aria-pressed="true">Integer</button>
+          <button type="button" class="class-chip is-selected" data-class-name="Float" aria-pressed="true">Float</button>
+          <button type="button" class="class-chip is-selected" data-class-name="Symbol" aria-pressed="true">Symbol</button>
+          <button type="button" class="class-chip is-selected" data-class-name="Range" aria-pressed="true">Range</button>
+        </div>
+      </section>
+
       <div class="workspace">
         <section class="terminal-panel" aria-label="rurima terminal">
           <p class="terminal-title">rurima terminal</p>
