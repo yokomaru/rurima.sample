@@ -246,12 +246,12 @@ a { color: inherit; }
   font-size: 0.82rem;
   line-height: 1.65;
   scrollbar-color: #4a799c #080d17;
-  scrollbar-width: thin;
+  scrollbar-width: auto;
 }
 
 #example::before { color: #ff7398; content: "irb(main):001> "; }
 
-#example::-webkit-scrollbar { height: 8px; }
+#example::-webkit-scrollbar { height: 12px; }
 
 #example::-webkit-scrollbar-track {
   background: #080d17;
