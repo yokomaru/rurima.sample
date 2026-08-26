@@ -3,6 +3,12 @@ const methodsData = await response.json();
 
 const HISTORY_STORAGE_KEY = "rurima-gacha-history";
 const HISTORY_LIMIT = 3;
+const CLASS_DISPLAY_ORDER = [
+  "Array", "Hash", "String", "Integer", "Float", "Symbol", "Range",
+  "Enumerable", "Regexp", "Time", "File", "Dir", "IO", "ENV", "Math", "Random", "Set",
+  "Object", "Kernel", "NilClass", "TrueClass", "FalseClass", "Numeric", "Comparable",
+  "Enumerator", "Struct", "Data", "Class", "Module", "Proc", "Method", "UnboundMethod", "Binding"
+];
 
 const drawButton = document.querySelector("#draw-button");
 const terminalIdle = document.querySelector("#terminal-idle");
@@ -18,6 +24,7 @@ const historyList = document.querySelector("#history-list");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const SAMPLING_DELAY = prefersReducedMotion ? 0 : 700;
 const RESULT_REVEAL_DELAY = prefersReducedMotion ? 0 : 300;
+const selectableClassNames = classNamesForDisplay(methodsData.methods);
 
 let history = loadHistory();
 let isSampling = false;
@@ -25,6 +32,21 @@ let isSampling = false;
 function methodLabel(method) {
   const separator = method.method_kind === "instance_method" ? "#" : ".";
   return `${method.class_name}${separator}${method.method_name}`;
+}
+
+function classNamesForDisplay(methods) {
+  const priority = new Map(CLASS_DISPLAY_ORDER.map((name, index) => [name, index]));
+
+  return [...new Set(methods.map((method) => method.class_name))].sort((left, right) => {
+    const leftPriority = priority.get(left);
+    const rightPriority = priority.get(right);
+
+    if (leftPriority !== undefined && rightPriority !== undefined) return leftPriority - rightPriority;
+    if (leftPriority !== undefined) return -1;
+    if (rightPriority !== undefined) return 1;
+
+    return left.localeCompare(right);
+  });
 }
 
 function loadHistory() {
