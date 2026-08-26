@@ -223,7 +223,7 @@ a { color: inherit; }
 .example-container.is-collapsed::after {
   position: absolute;
   right: 1px;
-  bottom: 30px;
+  bottom: 0;
   left: 1px;
   height: 5rem;
   pointer-events: none;
@@ -283,7 +283,14 @@ a { color: inherit; }
   cursor: pointer;
 }
 
-.example-container.is-collapsed #toggle-example:not([hidden]) { margin-top: -18px; }
+.example-container.is-collapsed #toggle-example:not([hidden]) {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  margin: 0;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
 
 #toggle-example:hover {
   border-color: #42e8f5;
