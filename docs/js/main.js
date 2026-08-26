@@ -2,7 +2,9 @@ const response = await fetch("data/methods.json");
 const methodsData = await response.json();
 
 const HISTORY_STORAGE_KEY = "rurima-gacha-history";
+const CLASS_SELECTION_STORAGE_KEY = "rurima-gacha-class-selection";
 const HISTORY_LIMIT = 3;
+const DEFAULT_SELECTED_CLASS_NAMES = ["Array", "Hash", "String", "Integer", "Float", "Symbol", "Range"];
 const CLASS_DISPLAY_ORDER = [
   "Array", "Hash", "String", "Integer", "Float", "Symbol", "Range",
   "Enumerable", "Regexp", "Time", "File", "Dir", "IO", "ENV", "Math", "Random", "Set",
@@ -21,6 +23,9 @@ const exampleContainer = document.querySelector(".example-container");
 const toggleExample = document.querySelector("#toggle-example");
 const ruremaUrl = document.querySelector("#rurema-url");
 const historyList = document.querySelector("#history-list");
+const classChipList = document.querySelector(".class-chip-list");
+const selectAllClassesButton = document.querySelector("#select-all-classes");
+const resetClassSelectionButton = document.querySelector("#reset-class-selection");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const SAMPLING_DELAY = prefersReducedMotion ? 0 : 700;
 const RESULT_REVEAL_DELAY = prefersReducedMotion ? 0 : 300;
@@ -28,6 +33,7 @@ const selectableClassNames = classNamesForDisplay(methodsData.methods);
 
 let history = loadHistory();
 let isSampling = false;
+let selectedClassNames = loadClassSelection();
 
 function methodLabel(method) {
   const separator = method.method_kind === "instance_method" ? "#" : ".";
@@ -47,6 +53,66 @@ function classNamesForDisplay(methods) {
 
     return left.localeCompare(right);
   });
+}
+
+function renderClassSelection() {
+  const chips = selectableClassNames.map((className) => {
+    const chip = document.createElement("button");
+    const isSelected = selectedClassNames.has(className);
+
+    chip.type = "button";
+    chip.className = "class-chip";
+    chip.dataset.className = className;
+    chip.textContent = className;
+    chip.classList.toggle("is-selected", isSelected);
+    chip.setAttribute("aria-pressed", String(isSelected));
+    chip.addEventListener("click", () => toggleClassSelection(className));
+    return chip;
+  });
+
+  classChipList.replaceChildren(...chips);
+  drawButton.disabled = selectedClassNames.size === 0 || isSampling;
+}
+
+function toggleClassSelection(className) {
+  if (selectedClassNames.has(className)) {
+    selectedClassNames.delete(className);
+  } else {
+    selectedClassNames.add(className);
+  }
+
+  saveClassSelection();
+  renderClassSelection();
+}
+
+function selectAllClasses() {
+  selectedClassNames = new Set(selectableClassNames);
+  saveClassSelection();
+  renderClassSelection();
+}
+
+function resetClassSelection() {
+  selectedClassNames = new Set(DEFAULT_SELECTED_CLASS_NAMES);
+  saveClassSelection();
+  renderClassSelection();
+}
+
+function loadClassSelection() {
+  const savedSelection = localStorage.getItem(CLASS_SELECTION_STORAGE_KEY);
+  if (!savedSelection) return new Set(DEFAULT_SELECTED_CLASS_NAMES);
+
+  try {
+    const parsedSelection = JSON.parse(savedSelection);
+    if (!Array.isArray(parsedSelection)) return new Set(DEFAULT_SELECTED_CLASS_NAMES);
+
+    return new Set(parsedSelection.filter((className) => selectableClassNames.includes(className)));
+  } catch {
+    return new Set(DEFAULT_SELECTED_CLASS_NAMES);
+  }
+}
+
+function saveClassSelection() {
+  localStorage.setItem(CLASS_SELECTION_STORAGE_KEY, JSON.stringify([...selectedClassNames]));
 }
 
 function loadHistory() {
@@ -117,8 +183,11 @@ function toggleExampleVisibility() {
 function executeSample() {
   if (isSampling) return;
 
-  const randomIndex = Math.floor(Math.random() * methodsData.methods.length);
-  const selectedMethod = methodsData.methods[randomIndex];
+  const eligibleMethods = methodsData.methods.filter((method) => selectedClassNames.has(method.class_name));
+  if (eligibleMethods.length === 0) return;
+
+  const randomIndex = Math.floor(Math.random() * eligibleMethods.length);
+  const selectedMethod = eligibleMethods[randomIndex];
 
   isSampling = true;
   drawButton.disabled = true;
@@ -132,11 +201,14 @@ function executeSample() {
 
     window.setTimeout(() => {
       isSampling = false;
-      drawButton.disabled = false;
+      renderClassSelection();
     }, RESULT_REVEAL_DELAY);
   }, SAMPLING_DELAY);
 }
 
+renderClassSelection();
 renderHistory();
 drawButton.addEventListener("click", executeSample);
 toggleExample.addEventListener("click", toggleExampleVisibility);
+selectAllClassesButton.addEventListener("click", selectAllClasses);
+resetClassSelectionButton.addEventListener("click", resetClassSelection);
