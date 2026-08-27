@@ -6,7 +6,9 @@ const updateStatus = await fetch("data/update-status.json")
 
 const HISTORY_STORAGE_KEY = "rurima-gacha-history";
 const CLASS_SELECTION_STORAGE_KEY = "rurima-gacha-class-selection";
+const FAVORITES_STORAGE_KEY = "rurima-gacha-favorites";
 const HISTORY_LIMIT = 3;
+const FAVORITES_LIMIT = 5;
 const DEFAULT_SELECTED_CLASS_NAMES = ["Array", "Hash", "String", "Integer", "Float", "Symbol", "Range"];
 const CLASS_DISPLAY_ORDER = [
   "Array", "Hash", "String", "Integer", "Float", "Symbol", "Range",
@@ -26,6 +28,8 @@ const exampleContainer = document.querySelector(".example-container");
 const toggleExample = document.querySelector("#toggle-example");
 const ruremaUrl = document.querySelector("#rurema-url");
 const historyList = document.querySelector("#history-list");
+const favoriteButton = document.querySelector("#favorite-button");
+const favoritesList = document.querySelector("#favorites-list");
 const classChipList = document.querySelector(".class-chip-list");
 const selectedClassCount = document.querySelector("#selected-class-count");
 const selectedClassSummary = document.querySelector("#selected-class-summary");
@@ -39,10 +43,13 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 const SAMPLING_DELAY = prefersReducedMotion ? 0 : 700;
 const RESULT_REVEAL_DELAY = prefersReducedMotion ? 0 : 300;
 const selectableClassNames = classNamesForDisplay(methodsData.methods);
+const methodsByKey = new Map(methodsData.methods.map((method) => [methodKey(method), method]));
 
 let history = loadHistory();
+let favoriteKeys = loadFavorites();
 let isSampling = false;
 let selectedClassNames = loadClassSelection();
+let currentMethod = null;
 
 function renderUpdateStatus() {
   const updatedAt = updateStatus?.updated_at;
@@ -55,6 +62,10 @@ function renderUpdateStatus() {
 function methodLabel(method) {
   const separator = method.method_kind === "instance_method" ? "#" : ".";
   return `${method.class_name}${separator}${method.method_name}`;
+}
+
+function methodKey(method) {
+  return [method.class_name, method.method_kind, method.method_name].join("\u0000");
 }
 
 function classNamesForDisplay(methods) {
@@ -177,8 +188,70 @@ function saveToHistory(method) {
   renderHistory();
 }
 
+function loadFavorites() {
+  const savedFavorites = localStorage.getItem(FAVORITES_STORAGE_KEY);
+  if (!savedFavorites) return [];
+
+  try {
+    const parsedFavorites = JSON.parse(savedFavorites);
+    if (!Array.isArray(parsedFavorites)) return [];
+
+    return [...new Set(parsedFavorites)]
+      .filter((key) => typeof key === "string" && methodsByKey.has(key))
+      .slice(0, FAVORITES_LIMIT);
+  } catch {
+    return [];
+  }
+}
+
+function saveFavorites() {
+  localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(favoriteKeys));
+}
+
+function renderFavoriteButton(method) {
+  const isFavorite = favoriteKeys.includes(methodKey(method));
+
+  favoriteButton.textContent = isFavorite ? "★" : "☆";
+  favoriteButton.setAttribute("aria-pressed", String(isFavorite));
+  favoriteButton.setAttribute("aria-label", isFavorite ? "お気に入りから削除" : "お気に入りに追加");
+}
+
+function renderFavorites() {
+  const favoriteItems = favoriteKeys.map((key) => methodsByKey.get(key)).filter(Boolean).map((method) => {
+    const item = document.createElement("li");
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.textContent = methodLabel(method);
+    button.addEventListener("click", () => {
+      if (!isSampling) showResult(method);
+    });
+    item.append(button);
+    return item;
+  });
+
+  favoritesList.replaceChildren(...favoriteItems);
+}
+
+function toggleFavorite() {
+  if (!currentMethod) return;
+
+  const currentKey = methodKey(currentMethod);
+  if (favoriteKeys.includes(currentKey)) {
+    favoriteKeys = favoriteKeys.filter((key) => key !== currentKey);
+  } else {
+    favoriteKeys = [currentKey, ...favoriteKeys].slice(0, FAVORITES_LIMIT);
+  }
+
+  saveFavorites();
+  renderFavoriteButton(currentMethod);
+  renderFavorites();
+}
+
 function showResult(method) {
+  currentMethod = method;
   methodName.textContent = methodLabel(method);
+  renderFavoriteButton(method);
   description.textContent = method.description ?? "説明なし";
   example.textContent = method.example ?? "使用例なし";
   example.classList.remove("is-expanded");
@@ -235,9 +308,11 @@ function executeSample() {
 
 renderClassSelection();
 renderHistory();
+renderFavorites();
 renderUpdateStatus();
 drawButton.addEventListener("click", executeSample);
 toggleExample.addEventListener("click", toggleExampleVisibility);
+favoriteButton.addEventListener("click", toggleFavorite);
 openClassSelectorButton.addEventListener("click", () => classSelectorDialog.showModal());
 closeClassSelectorButton.addEventListener("click", () => classSelectorDialog.close());
 selectAllClassesButton.addEventListener("click", selectAllClasses);

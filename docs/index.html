@@ -65,7 +65,10 @@
 
           <div id="terminal-result" hidden aria-live="polite">
             <p class="terminal-command">&gt; Rurima.sample</p>
-            <p class="terminal-output">=&gt; <strong id="method-name"></strong></p>
+            <div class="terminal-output-row">
+              <p class="terminal-output">=&gt; <strong id="method-name"></strong></p>
+              <button type="button" id="favorite-button" aria-pressed="false" aria-label="お気に入りに追加">☆</button>
+            </div>
             <p id="description" class="method-description"></p>
             <div class="example-container">
               <pre id="example"></pre>
@@ -79,6 +82,11 @@
           <section class="history-panel" aria-labelledby="history-title">
             <h2 id="history-title">history</h2>
             <ul id="history-list"></ul>
+          </section>
+
+          <section class="favorites-panel" aria-labelledby="favorites-title">
+            <h2 id="favorites-title">favorites</h2>
+            <ul id="favorites-list"></ul>
           </section>
 
           <section class="service-note" aria-label="サービスについて">
