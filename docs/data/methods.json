@@ -2036,7 +2036,7 @@
       "signatures": [
         "*(other) -> Complex"
       ],
-      "description": "積を計算します。",
+      "description": "self に other を掛けた値（＝積）を返します。",
       "example": "p Complex(1, 2) * 2            # => (2+4i)\np Complex(1, 2) * Complex(2, 3)  # => (-4+7i)\np Complex(1, 2) * Rational(1, 2) # => ((1/2)+(1/1)*i)",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/=2a.html"
     },
@@ -2047,8 +2047,8 @@
       "signatures": [
         "**(other) -> Complex"
       ],
-      "description": "冪(べき)乗を計算します。",
-      "example": "p Complex('i') ** 2           # => (-1+0i)",
+      "description": "self の other 乗を返します。",
+      "example": "p 1i ** 2 # => (-1+0i)",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/=2a=2a.html"
     },
     {
@@ -2058,7 +2058,7 @@
       "signatures": [
         "+(other) -> Complex"
       ],
-      "description": "和を計算します。",
+      "description": "self に other を足した値（＝和）を返します。",
       "example": "p Complex(1, 2) + Complex(2, 3) # => (3+5i)",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/=2b.html"
     },
@@ -2069,7 +2069,7 @@
       "signatures": [
         "-(other) -> Complex"
       ],
-      "description": "差を計算します。",
+      "description": "self から other を引いた値（＝差）を返します。",
       "example": "p Complex(1, 2) - Complex(2, 3) # => (-1-1i)",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/=2d.html"
     },
@@ -2080,8 +2080,8 @@
       "signatures": [
         "-@ -> Complex"
       ],
-      "description": "自身の符号を反転させたものを返します。",
-      "example": "p -Complex(1)   # => (-1+0i)\np -Complex(-1, 1) # => (1-1i)",
+      "description": "0 から self を引いた値を返します。",
+      "example": "p -Complex(1)     # => (-1+0i)\np -Complex(-1, 1) # => (1-1i)",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/=2d=40.html"
     },
     {
@@ -2092,8 +2092,8 @@
         "/(other)   -> Complex",
         "quo(other) -> Complex"
       ],
-      "description": "商を計算します。",
-      "example": "p Complex(10.0) / 3  # => (3.3333333333333335+(0/1)*i)\np Complex(10)   / 3  # => ((10/3)+(0/1)*i)",
+      "description": "self を other で割った値（＝商）を返します。",
+      "example": "p Complex(1.0) / 2 # => (0.5+0i)\n# 実部が Float、虚部が Integer\n\np Complex(1) / 2.0 # => (0.5+0.0i)\n# 実部・虚部ともに Float\n\np Complex(3, 4) / 2 # => ((3/2)+2i)\n# 実部が Rational、虚部が Integer",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/=2f.html"
     },
     {
@@ -2103,7 +2103,7 @@
       "signatures": [
         "<=>(other) -> -1 | 0 | 1 | nil"
       ],
-      "description": "self の虚部がゼロで other が実数の場合、\nself の実部の <=> メソッドで other と比較した結果を返します。\nother が Complex で虚部がゼロの場合も同様です。",
+      "description": "self と other が共に実数（＝虚部がゼロの数）のとき self.real <=> other.real の結果を返します。",
       "example": "p Complex(2, 3)  <=> Complex(2, 3) # => nil\np Complex(2, 3)  <=> 1           # => nil\np Complex(2)     <=> 1           # => 1\np Complex(2)     <=> 2           # => 0\np Complex(2)     <=> 3           # => -1",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/=3c=3d=3e.html"
     },
@@ -2114,8 +2114,8 @@
       "signatures": [
         "==(other) -> bool"
       ],
-      "description": "数値として等しいか判定します。",
-      "example": "p Complex(2, 1) == Complex(1) # => false\np Complex(1, 0) == Complex(1) # => true\np Complex(1, 0) == 1        # => true",
+      "description": "self が数値として other と等しければ true を、そうでなければ false を返します。",
+      "example": "p Complex(2, 1) == Complex(1) # => false\np Complex(1, 0) == Complex(1) # => true\np Complex(1, 0) == 1          # => true\np Complex(1, 0) == 1.0        # => true",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/=3d=3d.html"
     },
     {
@@ -2126,7 +2126,7 @@
         "abs       -> Numeric",
         "magnitude -> Numeric"
       ],
-      "description": "自身の絶対値を返します。",
+      "description": "self の絶対値（absolute value）を返します。",
       "example": "p Complex(1, 2).abs       # => 2.23606797749979\np Complex(3, 4).abs       # => 5.0\np Complex('1/2', '1/2').abs # => 0.7071067811865476",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/abs.html"
     },
@@ -2137,7 +2137,7 @@
       "signatures": [
         "abs2 -> Numeric"
       ],
-      "description": "自身の絶対値の 2 乗を返します。",
+      "description": "self の絶対値の 2 乗を返します。",
       "example": "p Complex(1, 1).abs2       # => 2\np Complex(1.0, 1.0).abs2   # => 2.0\np Complex('1/2', '1/2').abs2 # => (1/2)",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/abs2.html"
     },
@@ -2150,7 +2150,7 @@
         "angle -> Float",
         "phase -> Float"
       ],
-      "description": "自身の偏角を[-π,π]の範囲で返します。",
+      "description": "self の偏角を [-π,π] の範囲で返します。",
       "example": "p Complex.polar(3, Math::PI/2).arg # => 1.5707963267948966",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/angle.html"
     },
@@ -2173,7 +2173,7 @@
         "conjugate -> Complex",
         "conj      -> Complex"
       ],
-      "description": "自身の共役複素数を返します。",
+      "description": "self の共役複素数を返します。",
       "example": "p Complex(1, 2).conj # => (1-2i)",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/conj.html"
     },
@@ -2184,7 +2184,7 @@
       "signatures": [
         "denominator -> Integer"
       ],
-      "description": "分母を返します。",
+      "description": "self の分母（denominator）を返します。",
       "example": "p Complex('1/2+2/3i').denominator # => 6\np Complex(3).denominator          # => 1",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/denominator.html"
     },
@@ -2218,7 +2218,7 @@
         "imag      -> Numeric",
         "imaginary -> Numeric"
       ],
-      "description": "自身の虚部を返します。",
+      "description": "self の虚部を返します。",
       "example": "p Complex(3, 2).imag # => 2",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/imag.html"
     },
@@ -2229,7 +2229,7 @@
       "signatures": [
         "infinite? -> nil | 1"
       ],
-      "description": "実部と虚部のどちらも無限大ではない場合に nil を、そうでない場合に 1 を返します。",
+      "description": "実部と虚部のどちらも正または負の無限大ではない場合に nil を、そうでない場合に 1 を返します。",
       "example": "p (1+1i).infinite?                 # => nil\np (Float::INFINITY + 1i).infinite? # => 1",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/infinite=3f.html"
     },
@@ -2240,7 +2240,7 @@
       "signatures": [
         "inspect -> String"
       ],
-      "description": "自身を人間が読みやすい形の文字列表現にして返します。",
+      "description": "self を人間が読みやすい形の文字列表現にして返します。",
       "example": "p Complex(2).inspect                     # => \"(2+0i)\"\np Complex('-8/6').inspect                # => \"((-4/3)+0i)\"\np Complex('1/2i').inspect                # => \"(0+(1/2)*i)\"\np Complex(0, Float::INFINITY).inspect    # => \"(0+Infinity*i)\"\np Complex(Float::NAN, Float::NAN).inspect  # => \"(NaN+NaN*i)\"",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/inspect.html"
     },
@@ -2251,7 +2251,7 @@
       "signatures": [
         "numerator -> Complex"
       ],
-      "description": "分子を返します。",
+      "description": "self の分子（numerator）を返します。",
       "example": "p Complex('1/2+2/3i').numerator # => (3+4i)\np Complex(3).numerator        # => (3+0i)",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/numerator.html"
     },
@@ -2262,8 +2262,8 @@
       "signatures": [
         "polar -> [Numeric, Numeric]"
       ],
-      "description": "自身の絶対値と偏角を配列にして返します。",
-      "example": "p Complex.polar(1, 2).polar # => [1, 2]",
+      "description": "self の絶対値と偏角を配列にして返します。",
+      "example": "p Complex.polar(1, 2).polar # => [1.0, 2.0]",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/polar.html"
     },
     {
@@ -2271,12 +2271,11 @@
       "class_name": "Complex",
       "method_kind": "instance_method",
       "signatures": [
-        "to_r             -> Rational",
-        "rationalize      -> Rational",
+        "rationalize -> Rational",
         "rationalize(eps) -> Rational"
       ],
-      "description": "自身を [c:Rational] に変換します。",
-      "example": "p Complex(3).to_r  # => (3/1)\nComplex(3, 2).to_r # ~> RangeError",
+      "description": "self の虚部が [c:Integer] か [c:Rational] のゼロであれば実部を [c:Rational] に変換して返します。許容誤差 eps を与えることもできます。",
+      "example": "p Complex(0.1).rationalize            # => (1/10)\np Complex(Math::PI).rationalize(0.01) # => (22/7)",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/rationalize.html"
     },
     {
@@ -2286,7 +2285,7 @@
       "signatures": [
         "real -> Numeric"
       ],
-      "description": "自身の実部を返します。",
+      "description": "self の実部を返します。",
       "example": "p Complex(3, 2).real # => 3",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/real.html"
     },
@@ -2309,7 +2308,7 @@
         "rect        -> [Numeric, Numeric]",
         "rectangular -> [Numeric, Numeric]"
       ],
-      "description": "実部と虚部を配列にして返します。",
+      "description": "self の実部と虚部を配列にして返します。",
       "example": "p Complex(3).rect  # => [3, 0]\np Complex(3.5).rect  # => [3.5, 0]\np Complex(3, 2).rect # => [3, 2]",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/rect.html"
     },
@@ -2331,8 +2330,8 @@
       "signatures": [
         "to_f -> Float"
       ],
-      "description": "自身を [c:Float] に変換します。",
-      "example": "p Complex(3).to_f  # => 3.0\np Complex(3.5).to_f  # => 3.5\nComplex(3, 2).to_f # ~> RangeError",
+      "description": "self の虚部が [c:Integer] か [c:Rational] のゼロであれば実部を [c:Float] に変換して返します。",
+      "example": "p (1 + 0i).to_f  # => 1.0\np (1 + 0ri).to_f # => 1.0",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/to_f.html"
     },
     {
@@ -2342,9 +2341,20 @@
       "signatures": [
         "to_i -> Integer"
       ],
-      "description": "自身を整数に変換します。",
-      "example": "p Complex(3).to_i  # => 3\np Complex(3.5).to_i  # => 3\nComplex(3, 2).to_i # ~> RangeError",
+      "description": "self の虚部が [c:Integer] か [c:Rational] のゼロであれば実部を [c:Integer] に変換して返します。",
+      "example": "p (1.9 + 0i).to_i  # => 1\np (1.9 + 0ri).to_i # => 1",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/to_i.html"
+    },
+    {
+      "method_name": "to_r",
+      "class_name": "Complex",
+      "method_kind": "instance_method",
+      "signatures": [
+        "to_r             -> Rational"
+      ],
+      "description": "self の虚部がゼロであれば実部を [c:Rational] に変換して返します。",
+      "example": "p (0.75 + 0i).to_r   # => (3/4)\np (0.75 + 0ri).to_r  # => (3/4)\np (0.75 + 0.0i).to_r # => (3/4)",
+      "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/to_r.html"
     },
     {
       "method_name": "to_s",
@@ -2353,7 +2363,7 @@
       "signatures": [
         "to_s -> String"
       ],
-      "description": "自身を \"実部 + 虚部i\" 形式の文字列にして返します。",
+      "description": "self を \"実部 + 虚部i\" 形式の文字列にして返します。",
       "example": "p Complex(2).to_s                     # => \"2+0i\"\np Complex('-8/6').to_s                # => \"-4/3+0i\"\np Complex('1/2i').to_s                # => \"0+1/2i\"\np Complex(0, Float::INFINITY).to_s    # => \"0+Infinity*i\"\np Complex(Float::NAN, Float::NAN).to_s  # => \"NaN+NaN*i\"",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/i/to_s.html"
     },
@@ -2365,7 +2375,7 @@
         "Complex.polar(r, theta = 0) -> Complex"
       ],
       "description": "絶対値が r、偏角が theta である [c:Complex] クラスのオブジェクトを生成します。",
-      "example": "p Complex.polar(2.0)          # => (2.0+0.0i)\np Complex.polar(2.0, 0)       # => (2.0+0.0i)\np Complex.polar(2.0, Math::PI)  # => (-2.0+2.4492127076447545e-16i)",
+      "example": "p Complex.polar(2.0)          # => (2.0+0.0i)\np Complex.polar(2.0, 0)       # => (2.0+0.0i)\np Complex.polar(2.0, Math::PI)  # => (-2.0+0.0i)",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/s/polar.html"
     },
     {
@@ -2373,10 +2383,10 @@
       "class_name": "Complex",
       "method_kind": "class_method",
       "signatures": [
-        "Complex.rect(r, i = 0)        -> Complex",
-        "Complex.rectangular(r, i = 0) -> Complex"
+        "Complex.rect(real, imag = 0)        -> Complex",
+        "Complex.rectangular(real, imag = 0) -> Complex"
       ],
-      "description": "実部が r、虚部が i である [c:Complex] クラスのオブジェクトを生成します。",
+      "description": "実部が real、虚部が imag である [c:Complex] クラスのオブジェクトを生成します。",
       "example": "p Complex.rect(1)         # => (1+0i)\np Complex.rect(1, 2)      # => (1+2i)\np Complex.rectangular(1, 2) # => (1+2i)",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Complex/s/rect.html"
     },
@@ -7109,7 +7119,7 @@
         "%(other) -> Float",
         "modulo(other) -> Float"
       ],
-      "description": "算術演算子。剰余を計算します。",
+      "description": "self を other で割った余り（剰余）を返します。",
       "example": "# 剰余\np 3.0 % 1.2 # => 0.6000000000000001\n3.0 % 0.0   # ZeroDivisionError",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/=25.html"
     },
@@ -7120,8 +7130,8 @@
       "signatures": [
         "*(other) -> Float"
       ],
-      "description": "算術演算子。積を計算します。",
-      "example": "# 積\np 2.4 * 3 # => 7.2",
+      "description": "self に other を掛けた値（＝積）を返します。",
+      "example": "# 積\np 2.5 * 3 # => 7.5",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/=2a.html"
     },
     {
@@ -7129,10 +7139,10 @@
       "class_name": "Float",
       "method_kind": "instance_method",
       "signatures": [
-        "**(other) -> Float"
+        "**(other) -> Float | Complex"
       ],
-      "description": "算術演算子。冪を計算します。",
-      "example": "# 冪\np 1.2 ** 3.0  # => 1.7279999999999998\np 3.0 + 4.5 - 1.3 / 2.4 * 3 % 1.2 ** 3.0 # => 5.875\np 0.0 ** 0 # => 1.0",
+      "description": "self の other 乗を返します。",
+      "example": "# Float を返す例\np 1.2 ** 3.0  # => 1.7279999999999998\np 3.0 + 4.5 - 1.3 / 2.4 * 3 % 1.2 ** 3.0 # => 5.875\np 0.0 ** 0 # => 1.0\n\n# Complex を返す例\np (-1.0) ** 0.5 # => (0.0+1.0i)",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/=2a=2a.html"
     },
     {
@@ -7142,7 +7152,7 @@
       "signatures": [
         "+(other) -> Float"
       ],
-      "description": "算術演算子。和を計算します。",
+      "description": "self に other を足した値（＝和）を返します。",
       "example": "# 和\np 3.0 + 4.5 # => 7.5",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/=2b.html"
     },
@@ -7153,7 +7163,7 @@
       "signatures": [
         "-(other) -> Float"
       ],
-      "description": "算術演算子。差を計算します。",
+      "description": "self から other を引いた値（＝差）を返します。",
       "example": "# 差\np 4.5 - 1.3 # => 3.2",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/=2d.html"
     },
@@ -7164,7 +7174,7 @@
       "signatures": [
         "-@    -> Float"
       ],
-      "description": "単項演算子の - です。\nself の符号を反転させたものを返します。",
+      "description": "self の符号を反転させたものを返します。",
       "example": "p(- 1.2) # => -1.2\np(- -1.2)  # => 1.2",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/=2d=40.html"
     },
@@ -7175,7 +7185,7 @@
       "signatures": [
         "/(other) -> Float"
       ],
-      "description": "算術演算子。商を計算します。",
+      "description": "self を other で割った値（＝商）を返します。",
       "example": "# 商\np 1.3 / 2.4 # => 0.541666666666667\np 1.0 / 0 # => Infinity",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/=2f.html"
     },
@@ -7186,7 +7196,7 @@
       "signatures": [
         "<(other)  -> bool"
       ],
-      "description": "比較演算子。数値として小さいか判定します。",
+      "description": "self を数値として other と比較し、self が other より小さければ true を、そうでなければ false を返します。",
       "example": "p 3.14 <  3.1415  # => true\np 3.14 <= 3.1415  # => true",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/=3c.html"
     },
@@ -7197,7 +7207,7 @@
       "signatures": [
         "<=(other) -> bool"
       ],
-      "description": "比較演算子。数値として等しいまたは小さいか判定します。",
+      "description": "self を数値として other と比較し、self が other より小さいか等しければ true を、そうでなければ false を返します。",
       "example": "p 3.14 <  3.1415  # => true\np 3.14 <= 3.1415  # => true",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/=3c=3d.html"
     },
@@ -7208,7 +7218,7 @@
       "signatures": [
         "<=>(other) -> -1 | 0 | 1 | nil"
       ],
-      "description": "self を other と比較し、self のほうが大きい場合に 1、等しい場合に 0、小さい場合に -1 を返します。\n比較できない場合は nil を返します",
+      "description": "self を other と比較し、self が other より大きければ 1 を、等しければ 0 を、小さければ -1 を返します。\n比較できないときは nil を返します。",
       "example": "p 3.05 <=> 3.14     # => -1\np 1.732 <=> 1.414   # => 1\np 3.3 - 3.3 <=> 0.0 # => 0\n\n# 正負の無限大も比較できる\np 3.14 <=> Float::INFINITY  # => -1\np 3.14 <=> -Float::INFINITY # => 1\np Float::INFINITY <=> -Float::INFINITY # => 1\n\n# Complex オブジェクトでも虚部がゼロなら比較できる\np 3.14 <=> 3.1+0i # => 1",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/=3c=3d=3e.html"
     },
@@ -7219,8 +7229,8 @@
       "signatures": [
         "==(other) -> bool"
       ],
-      "description": "比較演算子。数値として等しいか判定します。",
-      "example": "p 3.14 == 3.14000 # => true\np 3.14 == 3.1415  # => false",
+      "description": "self が数値として other と等しければ true を、そうでなければ false を返します。",
+      "example": "p 3.14 == 3.14000 # => true\np 3.14 == 3.1415  # => false\np 1.0 == \"1\" # => false",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/=3d=3d.html"
     },
     {
@@ -7230,7 +7240,7 @@
       "signatures": [
         ">(other)  -> bool"
       ],
-      "description": "比較演算子。数値として大きいか判定します。",
+      "description": "self を数値として other と比較し、self が other より大きければ true を、そうでなければ false を返します。",
       "example": "p 3.14 >  3.1415  # => false\np 3.14 >= 3.1415  # => false",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/=3e.html"
     },
@@ -7241,7 +7251,7 @@
       "signatures": [
         ">=(other) -> bool"
       ],
-      "description": "比較演算子。数値として等しいまたは大きいか判定します。",
+      "description": "self を数値として other と比較し、self が other より大きいか等しければ true を、そうでなければ false を返します。",
       "example": "p 3.14 >  3.1415  # => false\np 3.14 >= 3.1415  # => false",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/=3e=3d.html"
     },
@@ -7253,7 +7263,7 @@
         "abs        -> Float",
         "magnitude  -> Float"
       ],
-      "description": "self の絶対値を返します。",
+      "description": "self の絶対値（absolute value）を返します。",
       "example": "p 34.56.abs    # => 34.56\np -34.56.abs   # => 34.56",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/abs.html"
     },
@@ -7266,8 +7276,8 @@
         "angle -> 0 | Float",
         "phase -> 0 | Float"
       ],
-      "description": "self の偏角(正の数なら 0、負の数なら [m:Math::PI])を返します。",
-      "example": "p 1.arg  # => 0\np -1.arg # => 3.141592653589793",
+      "description": "self の偏角を返します。",
+      "example": "p 1.0.arg  # => 0\np 0.0.arg  # => 0\np -1.0.arg # => 3.141592653589793\np -0.0.arg # => 3.141592653589793\np Float::NAN.arg # => NaN",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/angle.html"
     },
     {
@@ -7288,8 +7298,8 @@
       "signatures": [
         "denominator -> Integer"
       ],
-      "description": "self を [c:Rational] に変換した時の分母を返します。",
-      "example": "p 2.0.denominator       # => 1\np 0.5.denominator       # => 2",
+      "description": "self を [m:Float#to_r] で [c:Rational] に変換したときの分母（denominator）を返します。",
+      "example": "p 2.0.denominator # => 1\np 0.5.denominator # => 2\n\np 0.1.denominator # => 36028797018963968\n# リテラル `0.1` で生成される Float オブジェクトは\n# 1/10 からわずかにずれた値であるため",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/denominator.html"
     },
     {
@@ -7299,7 +7309,7 @@
       "signatures": [
         "divmod(other) -> [Numeric]"
       ],
-      "description": "self を other で割った商 q と余り r を、\n[q, r] という 2 要素の配列にして返します。\n商 q は常に整数ですが、余り r は整数であるとは限りません。",
+      "description": "self を other で割った商 q と余り r を、[q, r] という 2 要素の配列にして返します。\n商 q は常に整数ですが、余り r は整数であるとは限りません。",
       "example": "p 11.divmod(3)       # => [3, 2]\np (11.5).divmod(3.5) # => [3, 1.0]\np 11.divmod(-3)      # => [-4, -1]\np 11.divmod(3.5)     # => [3, 0.5]\np (-11).divmod(3.5)  # => [-4, 3.0]",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/divmod.html"
     },
@@ -7322,7 +7332,7 @@
         "finite? -> bool"
       ],
       "description": "self が ∞, -∞, NaN のどれでもない場合に true を返します。\nそれ以外の場合に false を返します。",
-      "example": "p 3.14.finite? # => true\ninf = 1.0/0\np inf.finite? # => false",
+      "example": "p 3.14.finite? # => true\np Float::INFINITY.finite? # => false\np Float::NAN.finite? # => false",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/finite=3f.html"
     },
     {
@@ -7343,7 +7353,7 @@
       "signatures": [
         "hash -> Integer"
       ],
-      "description": "ハッシュ値を返します。",
+      "description": "self のハッシュ値を返します。",
       "example": "pi1 = 3.14\npi2 = 3.14\npi3 = 3.1415\n\npi1.hash # => 335364239\npi2.hash # => 335364239\npi3.hash # => 420540030",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/hash.html"
     },
@@ -7378,7 +7388,7 @@
         "nan? -> bool"
       ],
       "description": "self が NaN(Not a number)のとき true を返し、そうでないとき false を返します。",
-      "example": "nan = 0.0/0.0\np nan       # => NaN\np nan.nan?  # => true",
+      "example": "p Float::NAN.nan?      # => true\np Float::INFINITY.nan? # => false\np 0.0.nan?             # => false",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/nan=3f.html"
     },
     {
@@ -7388,8 +7398,8 @@
       "signatures": [
         "negative? -> bool"
       ],
-      "description": "self が 0 未満の場合に true を返します。そうでない場合に false を返します。",
-      "example": "p -0.1.negative? # => true\np 0.0.negative?  # => false\np 0.1.negative?  # => false",
+      "description": "self が負の数なら true を、そうでないなら false を返します。",
+      "example": "p -0.1.negative? # => true\np 0.0.negative?  # => false\np 0.1.negative?  # => false\n\n# 負の無限大も負\np (-Float::INFINITY).negative? # => true\n\np -0.0.negative? # => false\n# 負とはみなされないことに注意",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/negative=3f.html"
     },
     {
@@ -7410,8 +7420,8 @@
       "signatures": [
         "numerator -> Integer"
       ],
-      "description": "self を [c:Rational] に変換した時の分子を返します。",
-      "example": "p 2.0.numerator         # => 2\np 0.5.numerator         # => 1",
+      "description": "self を [m:Float#to_r] で [c:Rational] に変換したときの分子（numerator）を返します。",
+      "example": "p 2.0.numerator # => 2\np 0.5.numerator # => 1\n\np 0.1.numerator # => 3602879701896397\n# リテラル `0.1` で生成される Float オブジェクトは\n# 1/10 からわずかにずれた値であるため",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/numerator.html"
     },
     {
@@ -7421,8 +7431,8 @@
       "signatures": [
         "positive? -> bool"
       ],
-      "description": "self が 0 より大きい場合に true を返します。そうでない場合に false を返します。",
-      "example": "p 0.1.positive? # => true\np 0.0.positive? # => false\np -0.1.positive?  # => false",
+      "description": "self が正の数なら true を、そうでないなら false を返します。",
+      "example": "p 0.1.positive? # => true\np 0.0.positive? # => false\np -0.1.positive?  # => false\n\n# 無限大も正\np Float::INFINITY.positive? # => true\n\n# NaN は正ではない\np Float::NAN.positive? # => false",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/positive=3f.html"
     },
     {
@@ -7456,7 +7466,7 @@
         "round(ndigits = 0)  -> Integer | Float",
         "round(ndigits = 0, half: :up)  -> Integer | Float"
       ],
-      "description": "self ともっとも近い整数もしくは実数を返します。",
+      "description": "self を ndigits で指定された位に丸めた数値を返します。",
       "example": "p 1.0.round    # => 1\np 1.2.round    # => 1\np (-1.2).round # => -1\np (-1.5).round # => -2\n\nt = Math::PI # => 3.141592653589793\np t.round(3) # => 3.142\np t.round(0) # => 3\np t.round(1) # => 3.1\n\nt = t**10      # => 93648.04747608298\np t.round(-0)  # => 93648\np t.round(-1)  # => 93650\np t.round(-2)  # => 93600\np t.round(-3)  # => 94000\np t.round(-100)  # => 0\n\np 2.5.round(half: :up) # => 3\np 2.5.round(half: :even) # => 2\np 2.5.round(half: :down) # => 2\np 3.5.round(half: :up) # => 4\np 3.5.round(half: :even) # => 4\np 3.5.round(half: :down) # => 3",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/round.html"
     },
@@ -7479,7 +7489,7 @@
         "to_i -> Integer",
         "truncate(ndigits = 0) -> Integer | Float"
       ],
-      "description": "小数点以下を切り捨てて値を整数に変換します。",
+      "description": "小数点以下を切り捨てて値を整数に変換して返します。",
       "example": "p 2.8.truncate         # => 2\np (-2.8).truncate      # => -2\np 1.234567.truncate(2) # => 1.23\np 34567.89.truncate(-2)  # => 34500",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/to_i.html"
     },
@@ -7501,8 +7511,8 @@
       "signatures": [
         "zero?  -> bool"
       ],
-      "description": "self がゼロの時、true を返します。そうでない場合は false を返します。",
-      "example": "p 10.0.zero?          # => false\np 0.zero?             # => true\np 0.0.zero?           # => true",
+      "description": "self がゼロなら true を、そうでなければ false を返します。",
+      "example": "p 0.0.zero?            # => true\np -0.0.zero?           # => true\np Float::EPSILON.zero? # => false",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Float/i/zero=3f.html"
     },
     {
@@ -11165,7 +11175,7 @@
       "signatures": [
         "readlines(rs = $/) -> [String]"
       ],
-      "description": "[c:ARGF]を [m:Kernel?.gets](rs) でEOFまで読み込んで、その各行を要素としてもつ配列を返します。\n行の区切りは引数 rs で指定した文字列になります。",
+      "description": "[c:ARGF]を [gets(rs)](m:Kernel?.gets) でEOFまで読み込んで、その各行を要素としてもつ配列を返します。\n行の区切りは引数 rs で指定した文字列になります。",
       "example": "ARGV << 'b.txt' << 'b.txt'\np readlines       # => [\"hello\\n\", \"it\\n\", \"\\n\", \"common\\n\", \"hello\\n\", \"it\\n\", \"\\n\", \"common\\n\"]\n\nARGV << 'b.txt' << 'b.txt'\np readlines(nil)  # => [\"hello\\nit\\n\\ncommon\\n\", \"hello\\nit\\n\\ncommon\\n\"]\n\nARGV << 'b.txt' << 'b.txt'\np readlines(\"\")   # => [\"hello\\nit\\n\\n\", \"common\\n\", \"hello\\nit\\n\\n\", \"common\\n\"]\n\nARGV << 'b.txt' << 'b.txt'\np readlines('it') # => [\"hello\\nit\", \"\\n\\ncommon\\n\", \"hello\\nit\", \"\\n\\ncommon\\n\"]\np readlines       # => []",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Kernel/m/readlines.html"
     },
@@ -13200,7 +13210,7 @@
       "signatures": [
         "+@    -> self"
       ],
-      "description": "単項演算子の + です。\nself を返します。",
+      "description": "self を返します。",
       "example": "p(+ 10)         # => 10\np(+ (-10))        # => -10\np(+ 0.1)        # => 0.1\np(+ (3r)) # => (3/1)\np(+ (1+3i))     # => (1+3i)",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/=2b=40.html"
     },
@@ -13211,7 +13221,7 @@
       "signatures": [
         "-@    -> Numeric"
       ],
-      "description": "単項演算子の - です。\nself の符号を反転させたものを返します。",
+      "description": "0 から self を引いた値を返します。",
       "example": null,
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/=2d=40.html"
     },
@@ -13222,7 +13232,7 @@
       "signatures": [
         "/(other)    -> Numeric"
       ],
-      "description": "除算の演算子です。\nself を other で割った商を返します。",
+      "description": "self を other で割った値（＝商）を返します。",
       "example": null,
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/=2f.html"
     },
@@ -13233,8 +13243,8 @@
       "signatures": [
         "<=>(other) -> -1 | 0 | 1 | nil"
       ],
-      "description": "自身が other より大きい場合に 1 を、等しい場合に 0 を、小さい場合には -1 をそれぞれ返します。\n自身と other が比較できない場合には nil を返します。",
-      "example": "p 1 <=> 0 # => 1\np 1 <=> 1 # => 0\np 1 <=> 2 # => -1\np 1 <=> \"0\" # => nil",
+      "description": "self を other と比較し、self が other より大きければ 1 を、等しければ 0 を、小さければ -1 を返します。\n比較できないときは nil を返します。",
+      "example": "p 1 <=> 0   # => 1\np 1 <=> 1   # => 0\np 1 <=> 2   # => -1\np 1 <=> \"0\" # => nil",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/=3c=3d=3e.html"
     },
     {
@@ -13245,7 +13255,7 @@
         "abs        -> Numeric",
         "magnitude  -> Numeric"
       ],
-      "description": "自身の絶対値を返します。",
+      "description": "self の絶対値（absolute value）を返します。",
       "example": "p 12.abs       # => 12\np (-34.56).abs # => 34.56\np -34.56.abs   # => 34.56",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/abs.html"
     },
@@ -13256,8 +13266,8 @@
       "signatures": [
         "abs2 -> Numeric"
       ],
-      "description": "自身の絶対値の 2 乗を返します。",
-      "example": "p 2.abs2  # => 4\np -2.abs2 # => 4\np 2.0.abs2  # => 4\np -2.0.abs2 # => 4",
+      "description": "self の絶対値（absolute value）の 2 乗を返します。",
+      "example": "# 2 乗と結果は同じ\np 2.abs2    # => 4\np -2.abs2   # => 4\np 2.0.abs2  # => 4.0\np -2.0.abs2 # => 4.0\np 0.5r.abs2 # => (1/4)",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/abs2.html"
     },
     {
@@ -13269,8 +13279,8 @@
         "angle -> 0 | Math::PI",
         "phase -> 0 | Math::PI"
       ],
-      "description": "自身の偏角(正の数なら 0、負の数なら [m:Math::PI])を返します。",
-      "example": "p 1.arg  # => 0\np -1.arg # => 3.141592653589793",
+      "description": "self の複素数としての偏角（argument）を返します。",
+      "example": "p 1.arg    # => 0\np 0.arg    # => 0\np -1.arg   # => 3.141592653589793\np -0.0.arg # => 3.141592653589793",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/angle.html"
     },
     {
@@ -13280,7 +13290,7 @@
       "signatures": [
         "ceil   -> Integer"
       ],
-      "description": "自身と等しいかより大きな整数のうち最小のものを返します。",
+      "description": "self と等しいかより大きな整数のうち最小のものを返します。",
       "example": "p 1.ceil      # => 1\np 1.2.ceil    # => 2\np (-1.2).ceil # => -1\np (-1.5).ceil # => -1",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/ceil.html"
     },
@@ -13291,7 +13301,7 @@
       "signatures": [
         "coerce(other)    -> [Numeric]"
       ],
-      "description": "自身と other が同じクラスになるよう、自身か other を変換し [other, self] という配列にして返します。",
+      "description": "self と other が同じクラスになるよう、self か other を変換し [other, self] という配列にして返します。",
       "example": "# lib/rational.rb より\n\ndef coerce(other)\n  if other.kind_of?(Float)\n    return other, self.to_f\n  elsif other.kind_of?(Integer)\n    return Rational.new!(other, 1), self\n  else\n    super\n  end\nend",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/coerce.html"
     },
@@ -13303,7 +13313,7 @@
         "conj      -> Numeric",
         "conjugate -> Numeric"
       ],
-      "description": "常に self を返します。",
+      "description": "self を返します。",
       "example": "p 10.conj     # => 10\np 0.1.conj    # => 0.1\np (2/3r).conj # => (2/3)",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/conj.html"
     },
@@ -13314,7 +13324,7 @@
       "signatures": [
         "denominator -> Integer"
       ],
-      "description": "自身を [c:Rational] に変換した時の分母を返します。",
+      "description": "self を [c:Rational] に変換したときの分母（denominator）を返します。",
       "example": null,
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/denominator.html"
     },
@@ -13336,7 +13346,7 @@
       "signatures": [
         "divmod(other)    -> [Numeric]"
       ],
-      "description": "self を other で割った商 q と余り r を、\n[q, r] という 2 要素の配列にして返します。\n商 q は常に整数ですが、余り r は整数であるとは限りません。",
+      "description": "self を other で割った商 q と余り r を、[q, r] という 2 要素の配列にして返します。\n商 q は常に整数ですが、余り r は整数であるとは限りません。",
       "example": "p 11.divmod(3)       # => [3, 2]\np (11.5).divmod(3.5) # => [3, 1.0]\np 11.divmod(-3)      # => [-4, -1]\np 11.divmod(3.5)     # => [3, 0.5]\np (-11).divmod(3.5)  # => [-4, 3.0]",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/divmod.html"
     },
@@ -13347,7 +13357,7 @@
       "signatures": [
         "eql?(other) -> bool"
       ],
-      "description": "自身と other のクラスが等しくかつ == メソッドで比較して等しい場合に true を返します。\nそうでない場合に false を返します。",
+      "description": "self と other のクラスが等しくかつ == メソッドで比較して等しい場合に true を返します。\nそうでない場合に false を返します。",
       "example": "p 1.eql?(1)    # => true\np 1.eql?(1.0)  # => false\np 1 == 1.0     # => true",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/eql=3f.html"
     },
@@ -13369,7 +13379,7 @@
       "signatures": [
         "finite? -> bool"
       ],
-      "description": "self の絶対値が有限値の場合に true を、そうでない場合に false を返します。",
+      "description": "self の絶対値が有限値なら true を、そうでないなら false を返します。",
       "example": "p 10.finite?                    # => true\np 3r.finite?                    # => true\n\np Float::INFINITY.finite?       # => false\np Float::INFINITY.is_a?(Numeric)  # => true",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/finite=3f.html"
     },
@@ -13380,7 +13390,7 @@
       "signatures": [
         "floor(ndigits = 0) -> Integer"
       ],
-      "description": "自身と等しいかより小さな整数のうち最大のものを返します。",
+      "description": "self と等しいかより小さな整数のうち最大のものを返します。",
       "example": "p 1.floor      # => 1\np 1.2.floor    # => 1\np (-1.2).floor # => -2\np (-1.5).floor # => -2",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/floor.html"
     },
@@ -13403,7 +13413,7 @@
         "imag      -> 0",
         "imaginary -> 0"
       ],
-      "description": "常に 0 を返します。",
+      "description": "0 を返します。",
       "example": "p 12.imag   # => 0\np -12.imag  # => 0\np 1.2.imag  # => 0\np -1.2.imag # => 0",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/imag.html"
     },
@@ -13414,7 +13424,7 @@
       "signatures": [
         "infinite? -> nil"
       ],
-      "description": "常に nil を返します。\n自身が [c:Float] か[c:Complex]、もしくはそのサブクラスのインスタンスの場合は、self の絶対値が負の無限大の場合に-1を、正の無限大の場合に1を、有限値の場合に nil を返します。",
+      "description": "nil を返します。",
       "example": "p 10.infinite?   # => nil\np (3r).infinite? # => nil",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/infinite=3f.html"
     },
@@ -13425,8 +13435,8 @@
       "signatures": [
         "integer?    -> bool"
       ],
-      "description": "自身が [c:Integer] かそのサブクラスのインスタンスの場合にtrue を返します。そうでない場合に false を返します。",
-      "example": "p (1.0).integer? # => false\np (1).integer? # => true",
+      "description": "false を返します。",
+      "example": "p 1.integer? # => true",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/integer=3f.html"
     },
     {
@@ -13436,7 +13446,7 @@
       "signatures": [
         "negative? -> bool"
       ],
-      "description": "self が 0 未満の場合に true を返します。そうでない場合に false を返します。",
+      "description": "self が負の数なら true を、そうでないなら false を返します。",
       "example": "p -1.negative? # => true\np 0.negative?  # => false\np 1.negative?  # => false",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/negative=3f.html"
     },
@@ -13447,7 +13457,7 @@
       "signatures": [
         "nonzero?    -> self | nil"
       ],
-      "description": "自身がゼロの時 nil を返し、非ゼロの時 self を返します。",
+      "description": "self が非ゼロなら self を、ゼロなら nil を返します。",
       "example": "p 10.nonzero?   # => 10\np 0.nonzero?    # => nil\np 0.0.nonzero?  # => nil\np 0r.nonzero?   # => nil",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/nonzero=3f.html"
     },
@@ -13458,7 +13468,7 @@
       "signatures": [
         "numerator -> Integer"
       ],
-      "description": "自身を [c:Rational] に変換した時の分子を返します。",
+      "description": "self を [c:Rational] に変換したときの分子（numerator）を返します。",
       "example": null,
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/numerator.html"
     },
@@ -13469,7 +13479,7 @@
       "signatures": [
         "polar -> [Numeric, Numeric]"
       ],
-      "description": "自身の絶対値と偏角を配列にして返します。正の数なら [self, 0]、負の数なら [-self, [m:Math::PI]] を返します。",
+      "description": "self の複素数としての極形式（polar form）を [self.abs, self.arg] として返します。",
       "example": "p 1.0.polar  # => [1.0, 0]\np 2.0.polar  # => [2.0, 0]\np -1.0.polar # => [1.0, 3.141592653589793]\np -2.0.polar # => [2.0, 3.141592653589793]",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/polar.html"
     },
@@ -13480,7 +13490,7 @@
       "signatures": [
         "positive? -> bool"
       ],
-      "description": "self が 0 より大きい場合に true を返します。そうでない場合に false を返します。",
+      "description": "self が正の数なら true を、そうでないなら false を返します。",
       "example": "p 1.positive?  # => true\np 0.positive?  # => false\np -1.positive? # => false",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/positive=3f.html"
     },
@@ -13491,8 +13501,8 @@
       "signatures": [
         "quo(other)    -> Rational | Float | Complex"
       ],
-      "description": "self を other で割った商を返します。\n整商を得たい場合は [m:Numeric#div] を使ってください。",
-      "example": "p 1.quo(3)    # => (1/3)\np 1.0.quo(3)  # => 0.3333333333333333\np 1.quo(3.0)  # => 0.3333333333333333\np 1.quo(0.5)  # => 2.0\n\np (1+1i).quo(1)  # => ((1/1)+(1/1)*i)\np 1.quo(1+1i)    # => ((1/2)-(1/2)*i)",
+      "description": "self を other で割った商（quotient）を返します。\n整商を得たい場合は [m:Numeric#div] を使ってください。",
+      "example": "p 1.quo(3)    # => (1/3)\np 1.0.quo(3)  # => 0.3333333333333333\np 1.quo(3.0)  # => 0.3333333333333333\np 1.quo(0.5)  # => 2.0\n\np (1+1i).quo(1)  # => (1+1i)\np 1.quo(1+1i)    # => ((1/2)-(1/2)*i)",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/quo.html"
     },
     {
@@ -13502,7 +13512,7 @@
       "signatures": [
         "real     -> Numeric"
       ],
-      "description": "自身を返します。",
+      "description": "self を返します。",
       "example": "p 10.real             # => 10\np -10.real            # => -10\np 0.1.real            # => 0.1\np (2/3r).real         # => (2/3)",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/real.html"
     },
@@ -13513,8 +13523,8 @@
       "signatures": [
         "real?    -> bool"
       ],
-      "description": "常に true を返します。([c:Complex] またはそのサブクラスではないことを意味します。)",
-      "example": "p 10.real?             # => true\np -10.real?            # => true\np 0.1.real?            # => true\np (2/3r).real?         # => true",
+      "description": "true を返します。",
+      "example": "# Integer, Float, Rational のインスタンスは `true` を返す\np -10.real?    # => true\np 0.1.real?    # => true\np (2/3r).real? # => true",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/real=3f.html"
     },
     {
@@ -13547,7 +13557,7 @@
       "signatures": [
         "round   -> Integer"
       ],
-      "description": "自身ともっとも近い整数を返します。",
+      "description": "self ともっとも近い整数を返します。",
       "example": "p 1.round      # => 1\np 1.2.round    # => 1\np (-1.2).round # => -1\np (-1.5).round # => -2",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/round.html"
     },
@@ -13566,8 +13576,8 @@
         "step(by:, to: -Float::INFINITY) -> Enumerator",
         "step(by:, to: -Float::INFINITY) -> Enumerator::ArithmeticSequence"
       ],
-      "description": "self からはじめ step を足しながら limit を越える前までブロックを繰り返します。step は負の数も指定できます。また、limit や step には [c:Float] なども指定できます。",
-      "example": "2.step(5){|n| p n}\n2\n3\n4\n5\n\n1.1.step(1.5, 0.1) {|n| p n}\n1.1\n1.2\n1.3\n1.4\n1.5\n\n10.step(6, -1){|n| p n}\n10\n9\n8\n7\n6\n\n3.step(by:2, to:10){|n| p n}\n3\n5\n7\n9",
+      "description": "self から始め、step を足しながら limit を越える前までブロックを繰り返します。step は負の数も指定できます。また、limit や step には [c:Float] なども指定できます。",
+      "example": "2.step(5) { |n| p n }\n# => 2\n#    3\n#    4\n#    5\n\n1.1.step(1.5, 0.1) { |n| p n }\n# => 1.1\n#    1.2000000000000002\n#    1.3\n#    1.4000000000000001\n#    1.5\n\n10.step(6, -1) { |n| p n }\n# => 10\n#    9\n#    8\n#    7\n#    6\n\n3.step(by:2, to:10) { |n| p n }\n# => 3\n#    5\n#    7\n#    9",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/step.html"
     },
     {
@@ -13577,7 +13587,7 @@
       "signatures": [
         "to_c -> Complex"
       ],
-      "description": "自身を複素数 ([c:Complex]) に変換します。Complex(self, 0) を返します。",
+      "description": "Complex(self, 0) を返します。",
       "example": "p 1.to_c            # => (1+0i)\np -1.to_c           # => (-1+0i)\np 1.0.to_c          # => (1.0+0i)\np (1/2r).to_c       # => ((1/2)+0i)",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/to_c.html"
     },
@@ -13599,7 +13609,7 @@
       "signatures": [
         "truncate   -> Integer"
       ],
-      "description": "0 から 自身までの整数で、自身にもっとも近い整数を返します。",
+      "description": "0 から self までの整数で、self にもっとも近い整数を返します。",
       "example": "p 1.truncate      # => 1\np 1.2.truncate    # => 1\np (-1.2).truncate # => -1\np (-1.5).truncate # => -1",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/truncate.html"
     },
@@ -13610,7 +13620,7 @@
       "signatures": [
         "zero?    -> bool"
       ],
-      "description": "自身がゼロの時、trueを返します。そうでない場合は false を返します。",
+      "description": "self がゼロなら true を、そうでないなら false を返します。",
       "example": "p 10.zero?              # => false\np 0.zero?               # => true\np 0.0.zero?             # => true",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Numeric/i/zero=3f.html"
     },
@@ -14614,7 +14624,7 @@
       "signatures": [
         "ruby2_keywords -> proc"
       ],
-      "description": "Marks the proc as passing keywords through a normal argument splat. This\nshould only be called on procs that accept an argument splat (\\*args\\)\nbut not explicit keywords or a keyword splat.  It marks the proc such\nthat if the proc is called with keyword arguments, the final hash\nargument is marked with a special flag such that if it is the final\nelement of a normal argument splat to another method call, and that\nmethod call does not include explicit keywords or a keyword splat, the\nfinal element is interpreted as keywords.  In other words, keywords will\nbe passed through the proc to other methods.",
+      "description": "self に、通常の引数スプラット(*args)を通してキーワード引数を透過させるためのフラグを設定し、self を返します。引数スプラットは受け取るものの、明示的なキーワード引数やキーワードスプラット(**kwargs)は受け取らない Proc に対してだけ使ってください。",
       "example": "module Mod\n  foo = ->(meth, *args, &block) do\n    send(:\"do_#{meth}\", *args, &block)\n  end\n  foo.ruby2_keywords if foo.respond_to?(:ruby2_keywords)\nend",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Proc/i/ruby2_keywords.html"
     },
@@ -16774,7 +16784,7 @@
         "==(other) -> bool",
         "eql?(other) -> bool"
       ],
-      "description": "otherが同じパターン、オプション、文字コードの正規表現であったらtrueを返します。",
+      "description": "self が other と同じパターン、オプション、文字コードの正規表現オブジェクトであったら true を、そうでなければ false を返します。",
       "example": "p /^eee$/   == /~eee$/x   # => false\np /^eee$/   == /~eee$/i   # => false\np /^eee$/e  == /~eee$/u   # => false\np /^eee$/ == Regexp.new(\"^eee$\") # => true\np /^eee$/.eql?(/^eee$/)          # => true",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Regexp/i/=3d=3d.html"
     },
@@ -16796,7 +16806,7 @@
       "signatures": [
         "=~(string) -> Integer | nil"
       ],
-      "description": "文字列 string との正規表現マッチを行います。マッチした場合、マッチした位置のインデックスを返します(先頭は0)。マッチしなかった場合、あるいは string が nil の場合には nil を返します。",
+      "description": "文字列 string との正規表現マッチを行います。マッチした場合、マッチした位置のインデックスを返します（先頭は 0）。マッチしなかった場合、あるいは string が nil の場合には nil を返します。",
       "example": "p /foo/ =~ \"foo\"  # => 0\np /foo/ =~ \"afoo\" # => 1\np /foo/ =~ \"bar\"  # => nil",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Regexp/i/=3d=7e.html"
     },
@@ -16807,7 +16817,7 @@
       "signatures": [
         "casefold? -> bool"
       ],
-      "description": "正規表現が大文字小文字の判定をしないようにコンパイルされている時、真を返します。",
+      "description": "self が大文字小文字の判定をしないようにコンパイルされていれば true を、そうでなければ false を返します。",
       "example": "reg = Regexp.new(\"foobar\", Regexp::IGNORECASE)\np reg.casefold? # => true\n\nreg = Regexp.new(\"hogehoge\")\np reg.casefold? # => false",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Regexp/i/casefold=3f.html"
     },
@@ -16818,7 +16828,7 @@
       "signatures": [
         "encoding   -> Encoding"
       ],
-      "description": "正規表現オブジェクトのエンコーディングを表す [c:Encoding] オブジェクトを返します。",
+      "description": "self のエンコーディングを表す [c:Encoding] オブジェクトを返します。",
       "example": null,
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Regexp/i/encoding.html"
     },
@@ -16829,7 +16839,7 @@
       "signatures": [
         "fixed_encoding? -> bool"
       ],
-      "description": "正規表現が任意の ASCII 互換エンコーディングとマッチ可能な時に false を返します。",
+      "description": "self が任意の ASCII 互換エンコーディングとマッチ可能なら false を、そうでないなら true を返します。",
       "example": "# -*- coding:utf-8 -*-\n\nr = /a/\np r.fixed_encoding?                             # => false\np r.encoding                                    # => #<Encoding:US-ASCII>\np r =~ \"\\u{6666} a\"                             # => 2\np r =~ \"\\xa1\\xa2 a\".force_encoding(\"euc-jp\")    # => 2\np r =~ \"abc\".force_encoding(\"euc-jp\")           # => 0\n\nr = /a/u\np r.fixed_encoding?                             # => true\np r.encoding                                    # => #<Encoding:UTF-8>\np r =~ \"\\u{6666} a\"                             # => 2\nbegin\n  r =~ \"\\xa1\\xa2\".force_encoding(\"euc-jp\")\nrescue => e\n  e.class                                       # => Encoding::CompatibilityError\nend\np r =~ \"abc\".force_encoding(\"euc-jp\")           # => 0\n\nr = /\\u{6666}/\np r.fixed_encoding?                             # => true\np r.encoding                                    # => #<Encoding:UTF-8>\np r =~ \"\\u{6666} a\"                             # => 0\nbegin\n  r =~ \"\\xa1\\xa2\".force_encoding(\"euc-jp\")\nrescue => e\n  e.class                                       # => Encoding::CompatibilityError\nend\np r =~ \"abc\".force_encoding(\"euc-jp\")           # => nil",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Regexp/i/fixed_encoding=3f.html"
     },
@@ -16840,7 +16850,7 @@
       "signatures": [
         "hash -> Integer"
       ],
-      "description": "正規表現のオプションやテキストに基づいたハッシュ値を返します。",
+      "description": "self のオプションやテキストに基づいたハッシュ値を返します。",
       "example": "p /abc/i.hash # => 4893115\np /abc/.hash  # => 4856055",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Regexp/i/hash.html"
     },
@@ -16863,7 +16873,7 @@
         "match(str, pos = 0) -> MatchData | nil",
         "match(str, pos = 0) {|m| ... } -> object | nil"
       ],
-      "description": "指定された文字列 str に対して位置 pos から自身が表す正規表現によるマッチングを行います。マッチした場合には結果を MatchData オブジェクトで返します。\nマッチしなかった場合 nil を返します。",
+      "description": "指定された文字列 str に対して位置 pos から self が表す正規表現によるマッチングを行います。マッチした場合には結果を [c:MatchData] オブジェクトで返します。\nマッチしなかった場合 nil を返します。",
       "example": "p(/(.).(.)/.match(\"foobar\", 3).captures)   # => [\"b\", \"r\"]\np(/(.).(.)/.match(\"foobar\", -3).captures)  # => [\"b\", \"r\"]",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Regexp/i/match.html"
     },
@@ -16874,7 +16884,7 @@
       "signatures": [
         "match?(str, pos = 0) -> bool"
       ],
-      "description": "指定された文字列 str に対して 位置 pos から自身が表す正規表現によるマッチングを行います。\nマッチした場合 true を返し、マッチしない場合には false を返します。\nまた、[m:$~] など正規表現のマッチに関する組み込み変数の値は変更されません。",
+      "description": "指定された文字列 str に対して位置 pos から self が表す正規表現によるマッチングを行います。\nマッチした場合 true を返し、マッチしない場合には false を返します。\nまた、[m:$~] など正規表現のマッチに関する組み込み変数の値は変更されません。",
       "example": "p /R.../.match?(\"Ruby\")  # => true\np /R.../.match?(\"Ruby\", 1) # => false\np /P.../.match?(\"Ruby\")  # => false\np $&                     # => nil",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Regexp/i/match=3f.html"
     },
@@ -16885,7 +16895,7 @@
       "signatures": [
         "named_captures -> { String => [Integer] }"
       ],
-      "description": "正規表現に含まれる名前付きキャプチャ(named capture)の情報を\n[c:Hash] で返します。",
+      "description": "self に含まれる名前付きキャプチャ（named capture）の情報を [c:Hash] で返します。",
       "example": "p /(?<foo>.)(?<bar>.)/.named_captures\n# => {\"foo\"=>[1], \"bar\"=>[2]}\n\np /(?<foo>.)(?<foo>.)/.named_captures\n# => {\"foo\"=>[1, 2]}\n\n# 名前付きキャプチャを持たないときは空の Hash を返します。\np /(.)(.)/.named_captures\n# => {}",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Regexp/i/named_captures.html"
     },
@@ -16896,7 +16906,7 @@
       "signatures": [
         "names -> [String]"
       ],
-      "description": "正規表現に含まれる名前付きキャプチャ(named capture)の名前を文字列の配列で返します。",
+      "description": "self に含まれる名前付きキャプチャ（named capture）の名前を文字列の配列で返します。",
       "example": "/(?<foo>.)(?<bar>.)(?<baz>.)/.names\n\n# => [\"foo\", \"bar\", \"baz\"]\n   p /(?<foo>.)(?<foo>.)/.names\n# => [\"foo\"]\n\np /(.)(.)/.names\n# => []",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Regexp/i/names.html"
     },
@@ -16907,7 +16917,7 @@
       "signatures": [
         "options -> Integer"
       ],
-      "description": "正規表現の生成時に指定されたオプションを返します。戻り値は、\n[m:Regexp::EXTENDED], [m:Regexp::IGNORECASE],\n[m:Regexp::MULTILINE],\n[m:Regexp::FIXEDENCODING],\n[m:Regexp::NOENCODING],\nの論理和です。",
+      "description": "self の生成時に指定されたオプションを返します。戻り値は、\n[m:Regexp::EXTENDED], [m:Regexp::IGNORECASE],\n[m:Regexp::MULTILINE],\n[m:Regexp::FIXEDENCODING],\n[m:Regexp::NOENCODING],\nの論理和です。",
       "example": "p Regexp::IGNORECASE # => 1\np //i.options        # => 1\n\np Regexp.new(\"foo\", Regexp::IGNORECASE ).options # => 1\np Regexp.new(\"foo\", Regexp::EXTENDED).options    # => 2\np Regexp.new(\"foo\", Regexp::IGNORECASE | Regexp::EXTENDED).options # => 3\np Regexp.new(\"foo\", Regexp::MULTILINE).options # => 4\np Regexp.new(\"foo\", Regexp::IGNORECASE | Regexp::MULTILINE ).options # => 5\np Regexp.new(\"foo\", Regexp::MULTILINE | Regexp::EXTENDED).options # =>6\np Regexp.new(\"foo\", Regexp::IGNORECASE | Regexp::MULTILINE | Regexp::EXTENDED).options # => 7",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Regexp/i/options.html"
     },
@@ -16918,7 +16928,7 @@
       "signatures": [
         "source -> String"
       ],
-      "description": "その正規表現のもととなった文字列表現を生成して返します。",
+      "description": "self のもととなった文字列表現を生成して返します。",
       "example": "re = /foo|bar|baz/i\np re.source     # => \"foo|bar|baz\"",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Regexp/i/source.html"
     },
@@ -16929,7 +16939,7 @@
       "signatures": [
         "timeout -> Float | nil"
       ],
-      "description": "その正規表現のマッチにかける時間の上限を秒数で返します。",
+      "description": "self のマッチにかける時間の上限を秒数で返します。",
       "example": "re = Regexp.new(\"^(a|a)*$\", timeout: 0.5)\np re.timeout      # => 0.5\n\np /^(a|a)*$/.timeout # => nil",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Regexp/i/timeout.html"
     },
@@ -16940,7 +16950,7 @@
       "signatures": [
         "to_s -> String"
       ],
-      "description": "正規表現の文字列表現を生成して返します。返される文字列は他の正規表現に埋め込んでもその意味が保持されるようになっています。",
+      "description": "self の文字列表現を生成して返します。返される文字列は他の正規表現に埋め込んでもその意味が保持されるようになっています。",
       "example": "re = /foo|bar|baz/i\np re.to_s       # => \"(?i-mx:foo|bar|baz)\"\np /#{re}+/o     # => /(?i-mx:foo|bar|baz)+/",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Regexp/i/to_s.html"
     },
@@ -16975,7 +16985,7 @@
         "Regexp.escape(string) -> String",
         "Regexp.quote(string) -> String"
       ],
-      "description": "string の中で正規表現において特別な意味を持つ文字の直前にエスケープ文字(バックスラッシュ)を挿入した文字列を返します。",
+      "description": "string の中で正規表現において特別な意味を持つ文字の直前にエスケープ文字（バックスラッシュ）を挿入した文字列を返します。",
       "example": "rp = Regexp.escape(\"$bc^\")\np rp # => \"\\\\$bc\\\\^\"",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Regexp/s/escape.html"
     },
@@ -16984,7 +16994,7 @@
       "class_name": "Regexp",
       "method_kind": "class_method",
       "signatures": [
-        "Regexp.last_match -> MatchData"
+        "Regexp.last_match -> MatchData | nil"
       ],
       "description": "カレントスコープで最後に行った正規表現マッチの [c:MatchData] オブジェクトを返します。このメソッドの呼び出しは [m:$~]\nの参照と同じです。",
       "example": "/(.)(.)/ =~ \"ab\"\np Regexp.last_match      # => #<MatchData \"ab\" 1:\"a\" 2:\"b\">\np Regexp.last_match[0]   # => \"ab\"\np Regexp.last_match[1]   # => \"a\"\np Regexp.last_match[2]   # => \"b\"\np Regexp.last_match[3]   # => nil",
@@ -17031,7 +17041,7 @@
       "signatures": [
         "Regexp.try_convert(obj) -> Regexp | nil"
       ],
-      "description": "obj を to_regexp メソッドで Regexp オブジェクトに変換しようと試みます。",
+      "description": "obj を正規表現オブジェクトに変換するためのメソッドです。",
       "example": "p Regexp.try_convert(/re/)    # => /re/\np Regexp.try_convert(\"re\")    # => nil",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Regexp/s/try_convert.html"
     },
@@ -17042,7 +17052,7 @@
       "signatures": [
         "Regexp.union(*pattern) -> Regexp"
       ],
-      "description": "引数として与えた pattern を選択 | で連結し、Regexp として返します。\n結果の Regexp は与えた pattern のどれかにマッチする場合にマッチするものになります。",
+      "description": "引数として与えた pattern を選択 | で連結し、正規表現オブジェクトとして返します。\n返り値は与えた pattern のどれかにマッチする場合にマッチするものになります。",
       "example": "p Regexp.union(/a/, /b/, /c/) # => /(?-mix:a)|(?-mix:b)|(?-mix:c)/",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Regexp/s/union.html"
     },
@@ -17159,6 +17169,17 @@
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/RubyVM/s/stat.html"
     },
     {
+      "method_name": "node_id_for_backtrace_location",
+      "class_name": "RubyVM::AbstractSyntaxTree",
+      "method_kind": "class_method",
+      "signatures": [
+        "RubyVM::AbstractSyntaxTree.node_id_for_backtrace_location(backtrace_location) -> Integer"
+      ],
+      "description": "引数の [c:Thread::Backtrace::Location] が指すコードの位置に対応するノードの ID を返します。",
+      "example": "loc = caller_locations(0, 1).first\np RubyVM::AbstractSyntaxTree.node_id_for_backtrace_location(loc) # => 3",
+      "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/RubyVM=3a=3aAbstractSyntaxTree/s/node_id_for_backtrace_location.html"
+    },
+    {
       "method_name": "of",
       "class_name": "RubyVM::AbstractSyntaxTree",
       "method_kind": "class_method",
@@ -17193,6 +17214,61 @@
       "description": "pathname のファイルを読み込み、その内容を抽象構文木にパースし、その木の根ノードを返します。",
       "example": "pp RubyVM::AbstractSyntaxTree.parse_file(__FILE__)\n# => (SCOPE@1:0-1:50\n#     tbl: []\n#     args: nil\n#     body:\n#       (FCALL@1:0-1:50 :pp\n#          (LIST@1:3-1:50\n#             (CALL@1:3-1:50\n#                (COLON2@1:3-1:29 (CONST@1:3-1:9 :RubyVM) :AbstractSyntaxTree)\n#                :parse_file (LIST@1:41-1:49 (STR@1:41-1:49 \"\") nil)) nil)))",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/RubyVM=3a=3aAbstractSyntaxTree/s/parse_file.html"
+    },
+    {
+      "method_name": "first_column",
+      "class_name": "RubyVM::AbstractSyntaxTree::Location",
+      "method_kind": "instance_method",
+      "signatures": [
+        "first_column -> Integer"
+      ],
+      "description": "ソースコード中で、この位置情報が指す範囲が始まる列番号を返します。",
+      "example": "loc = RubyVM::AbstractSyntaxTree.parse('1 + 2').locations.first\np loc.first_column # => 0",
+      "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/RubyVM=3a=3aAbstractSyntaxTree=3a=3aLocation/i/first_column.html"
+    },
+    {
+      "method_name": "first_lineno",
+      "class_name": "RubyVM::AbstractSyntaxTree::Location",
+      "method_kind": "instance_method",
+      "signatures": [
+        "first_lineno -> Integer"
+      ],
+      "description": "ソースコード中で、この位置情報が指す範囲が始まる行番号を返します。",
+      "example": "loc = RubyVM::AbstractSyntaxTree.parse('1 + 2').locations.first\np loc.first_lineno # => 1",
+      "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/RubyVM=3a=3aAbstractSyntaxTree=3a=3aLocation/i/first_lineno.html"
+    },
+    {
+      "method_name": "last_column",
+      "class_name": "RubyVM::AbstractSyntaxTree::Location",
+      "method_kind": "instance_method",
+      "signatures": [
+        "last_column -> Integer"
+      ],
+      "description": "ソースコード中で、この位置情報が指す範囲が終わる列番号を返します。",
+      "example": "loc = RubyVM::AbstractSyntaxTree.parse('1 + 2').locations.first\np loc.last_column # => 5",
+      "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/RubyVM=3a=3aAbstractSyntaxTree=3a=3aLocation/i/last_column.html"
+    },
+    {
+      "method_name": "last_lineno",
+      "class_name": "RubyVM::AbstractSyntaxTree::Location",
+      "method_kind": "instance_method",
+      "signatures": [
+        "last_lineno -> Integer"
+      ],
+      "description": "ソースコード中で、この位置情報が指す範囲が終わる行番号を返します。",
+      "example": "loc = RubyVM::AbstractSyntaxTree.parse('1 + 2').locations.first\np loc.last_lineno # => 1",
+      "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/RubyVM=3a=3aAbstractSyntaxTree=3a=3aLocation/i/last_lineno.html"
+    },
+    {
+      "method_name": "all_tokens",
+      "class_name": "RubyVM::AbstractSyntaxTree::Node",
+      "method_kind": "instance_method",
+      "signatures": [
+        "all_tokens -> Array | nil"
+      ],
+      "description": "self を含むスクリプト全体のトークンの配列を返します。\n各トークンの形式は [m:RubyVM::AbstractSyntaxTree::Node#tokens] と同じです。",
+      "example": "root = RubyVM::AbstractSyntaxTree.parse(\"x = 1\", keep_tokens: true)\np root.all_tokens.size # => 5",
+      "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/RubyVM=3a=3aAbstractSyntaxTree=3a=3aNode/i/all_tokens.html"
     },
     {
       "method_name": "children",
@@ -17259,6 +17335,61 @@
       "description": "ソースコード中で、self を表すテキストが最後に現れる行番号を返します。",
       "example": "node = RubyVM::AbstractSyntaxTree.parse('1 + 1')\np node.last_lineno # => 1",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/RubyVM=3a=3aAbstractSyntaxTree=3a=3aNode/i/last_lineno.html"
+    },
+    {
+      "method_name": "locations",
+      "class_name": "RubyVM::AbstractSyntaxTree::Node",
+      "method_kind": "instance_method",
+      "signatures": [
+        "locations -> Array"
+      ],
+      "description": "self に関連づけられた位置情報([c:RubyVM::AbstractSyntaxTree::Location])の配列を返します。",
+      "example": "node = RubyVM::AbstractSyntaxTree.parse(\"return 1 unless x\").children[2]\np node.type # => :UNLESS\np node.locations\n# => [#<RubyVM::AbstractSyntaxTree::Location:@1:0-1:17>,\n#     #<RubyVM::AbstractSyntaxTree::Location:@1:9-1:15>, nil, nil]",
+      "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/RubyVM=3a=3aAbstractSyntaxTree=3a=3aNode/i/locations.html"
+    },
+    {
+      "method_name": "node_id",
+      "class_name": "RubyVM::AbstractSyntaxTree::Node",
+      "method_kind": "instance_method",
+      "signatures": [
+        "node_id -> Integer"
+      ],
+      "description": "self に割り当てられた ID を返します。",
+      "example": "node = RubyVM::AbstractSyntaxTree.parse(\"x = 1 + 2\\ny = 3\\n\")\np node.node_id # => 9",
+      "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/RubyVM=3a=3aAbstractSyntaxTree=3a=3aNode/i/node_id.html"
+    },
+    {
+      "method_name": "script_lines",
+      "class_name": "RubyVM::AbstractSyntaxTree::Node",
+      "method_kind": "instance_method",
+      "signatures": [
+        "script_lines -> Array | nil"
+      ],
+      "description": "スクリプト全体の各行を要素とする文字列の配列を返します。",
+      "example": "root = RubyVM::AbstractSyntaxTree.parse(\"x = 1 + 2\\ny = 3\\n\", keep_script_lines: true)\np root.script_lines # => [\"x = 1 + 2\\n\", \"y = 3\\n\"]",
+      "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/RubyVM=3a=3aAbstractSyntaxTree=3a=3aNode/i/script_lines.html"
+    },
+    {
+      "method_name": "source",
+      "class_name": "RubyVM::AbstractSyntaxTree::Node",
+      "method_kind": "instance_method",
+      "signatures": [
+        "source -> String | nil"
+      ],
+      "description": "self に対応する部分のソースコードを文字列で返します。",
+      "example": "root = RubyVM::AbstractSyntaxTree.parse(\"x = 1 + 2\\ny = 3\\n\", keep_script_lines: true)\np root.source                         # => \"x = 1 + 2\\ny = 3\"\np root.children[2].children[0].source # => \"x = 1 + 2\"",
+      "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/RubyVM=3a=3aAbstractSyntaxTree=3a=3aNode/i/source.html"
+    },
+    {
+      "method_name": "tokens",
+      "class_name": "RubyVM::AbstractSyntaxTree::Node",
+      "method_kind": "instance_method",
+      "signatures": [
+        "tokens -> Array | nil"
+      ],
+      "description": "self に対応する部分のトークンの配列を返します。",
+      "example": "root = RubyVM::AbstractSyntaxTree.parse(\"x = 1\", keep_tokens: true)\npp root.tokens\n# => [[0, :tIDENTIFIER, \"x\", [1, 0, 1, 1]],\n#     [1, :tSP, \" \", [1, 1, 1, 2]],\n#     [2, :\"=\", \"=\", [1, 2, 1, 3]],\n#     [3, :tSP, \" \", [1, 3, 1, 4]],\n#     [4, :tINTEGER, \"1\", [1, 4, 1, 5]]]",
+      "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/RubyVM=3a=3aAbstractSyntaxTree=3a=3aNode/i/tokens.html"
     },
     {
       "method_name": "type",
@@ -18385,7 +18516,7 @@
         "chomp!(rs = $/) -> self | nil"
       ],
       "description": "self の末尾から rs で指定する改行コードを取り除きます。\nただし rs が \"\\n\" ($/ のデフォルト値) のときは、実行環境によらず \"\\r\", \"\\r\\n\", \"\\n\" のすべてを改行コードとみなして取り除きます。",
-      "example": "buf = \"string\\n\"\np buf.chomp!  # => nil\np buf       # => \"string\"\n\n$/ = \"\\n\"   # デフォルトと同じ\np \"foo\\r\".chomp!    # => \"foo\"\np \"foo\\r\\n\".chomp!  # => \"foo\"\np \"foo\\n\".chomp!    # => \"foo\"\np \"foo\\n\\r\".chomp!  # => \"foo\\n\"\n\nbuf = \"string\\n\"\np buf.chomp!(nil)  # => nil\np buf            # => \"string\\n\"\n\np \"foo\\r\\n\\n\".chomp!(\"\")  # => \"foo\"\np \"foo\\n\\r\\n\".chomp!(\"\")  # => \"foo\"\np \"foo\\n\\r\\r\".chomp!(\"\")  # => nil",
+      "example": "buf = \"string\\n\"\np buf.chomp!  # => \"string\"\np buf       # => \"string\"\n\n$/ = \"\\n\"   # デフォルトと同じ\np \"foo\\r\".chomp!    # => \"foo\"\np \"foo\\r\\n\".chomp!  # => \"foo\"\np \"foo\\n\".chomp!    # => \"foo\"\np \"foo\\n\\r\".chomp!  # => \"foo\\n\"\n\nbuf = \"string\\n\"\np buf.chomp!(nil)  # => nil\np buf            # => \"string\\n\"\n\np \"foo\\r\\n\\n\".chomp!(\"\")  # => \"foo\"\np \"foo\\n\\r\\n\".chomp!(\"\")  # => \"foo\"\np \"foo\\n\\r\\r\".chomp!(\"\")  # => nil",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/String/i/chomp=21.html"
     },
     {
@@ -18485,7 +18616,7 @@
         "delete!(*strs) -> self | nil"
       ],
       "description": "self から strs に含まれる文字を破壊的に取り除きます。",
-      "example": "str = \"123456789\"\np str.delete!(\"2378\")         # => \"14569\"\np str                         # => \"14569\"\n\nstr = \"123456789\"\np str.delete!(\"2-8\", \"^4-6\")  # => \"14569\"\np str                         # => \"14569\"\n\nstr = \"abc\"\np str.delete!(\"2378\")         # => \"nil\"\np str                         # => \"abc\"",
+      "example": "str = \"123456789\"\np str.delete!(\"2378\")         # => \"14569\"\np str                         # => \"14569\"\n\nstr = \"123456789\"\np str.delete!(\"2-8\", \"^4-6\")  # => \"14569\"\np str                         # => \"14569\"\n\nstr = \"abc\"\np str.delete!(\"2378\")         # => nil\np str                         # => \"abc\"",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/String/i/delete=21.html"
     },
     {
@@ -18747,7 +18878,7 @@
         "gsub!(pattern, replace) -> self | nil"
       ],
       "description": "文字列中で pattern にマッチする部分全てを文字列 replace に破壊的に置き換えます。",
-      "example": "buf = \"String-String\"\nbuf.gsub!(/in./, \"!!\")\np buf   # => \"Str!!-Str!!\"\n\nbuf = \"String.String\"\nbuf.gsub!(/in./, '<<\\&>>')\np buf   # => \"Str<<ing>>-Str<<ing>>\"\n\nbuf = \"foo\"\nbuf.gsub!(/(?<name>fo)/, 'match: \\k<name>')\np buf   # => \"match: foo\"",
+      "example": "buf = \"String-String\"\nbuf.gsub!(/in./, \"!!\")\np buf   # => \"Str!!-Str!!\"\n\nbuf = \"String.String\"\nbuf.gsub!(/in./, '<<\\&>>')\np buf   # => \"Str<<ing>>.Str<<ing>>\"\n\nbuf = \"foo\"\nbuf.gsub!(/(?<name>fo)/, 'match: \\k<name>')\np buf   # => \"match: foo\"",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/String/i/gsub=21.html"
     },
     {
@@ -19214,7 +19345,7 @@
         "sub!(pattern, replace) -> self | nil"
       ],
       "description": "文字列中で pattern にマッチした最初の部分を文字列 replace へ破壊的に置き換えます。",
-      "example": "buf = \"String-String\"\nbuf.sub!(/in./, \"!!\")\np buf   # => \"Str!!-String\"\n\nbuf = \"String.String\"\nbuf.sub!(/in./, '<<\\&>>')\np buf   # => \"Str<<ing>>-String\"\n\nbuf = \"foo\"\nbuf.sub!(/(?<name>fo)/, 'match: \\k<name>')\np buf   # => \"match: foo\"",
+      "example": "buf = \"String-String\"\nbuf.sub!(/in./, \"!!\")\np buf   # => \"Str!!-String\"\n\nbuf = \"String.String\"\nbuf.sub!(/in./, '<<\\&>>')\np buf   # => \"Str<<ing>>.String\"\n\nbuf = \"foo\"\nbuf.sub!(/(?<name>fo)/, 'match: \\k<name>')\np buf   # => \"match: foo\"",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/String/i/sub=21.html"
     },
     {
@@ -20530,7 +20661,7 @@
         "Thread.kill(thread)    -> Thread"
       ],
       "description": "指定したスレッド thread に対して [m:Thread#exit] を呼びます。終了したスレッドを返します。",
-      "example": "th = Thread.new do\nend\n    \np Thread.kill(th)     # => #<Thread:0x40221bc8 dead>",
+      "example": "th = Thread.new do\nend\n\np Thread.kill(th)     # => #<Thread:0x40221bc8 dead>",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Thread/s/kill.html"
     },
     {
@@ -20541,7 +20672,7 @@
         "Thread.list    -> [Thread]"
       ],
       "description": "全ての生きているスレッドを含む配列を生成して返します。aborting 状態であるスレッドも要素に含まれます。",
-      "example": "Thread.new do\n  sleep \nend\nsleep 0.1\n  \np Thread.list   # => [#<Thread:0x40377a54 sleep>, #<Thread:0x4022e6fc run>]",
+      "example": "Thread.new do\n  sleep\nend\nsleep 0.1\n\np Thread.list   # => [#<Thread:0x40377a54 sleep>, #<Thread:0x4022e6fc run>]",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Thread/s/list.html"
     },
     {
@@ -20574,7 +20705,7 @@
         "Thread.pass    -> nil"
       ],
       "description": "他のスレッドに実行権を譲ります。実行中のスレッドの状態を変えずに、他の実行可能状態のスレッドに切り替わるよう、スレッドスケジューラにヒントを与えます。実際に切り替わるかどうか、また次にどのスレッドが実行されるかは OS\nやスケジューラの実装に依存するため、保証されません。",
-      "example": "Thread.new do\n  (1..3).each{|i|\n    p i\n    Thread.pass\n  }\n  exit\nend\n \nloop do\n  Thread.pass\n  p :main\nend\n\n# =>\n1\n:main\n2\n:main\n3\n:main",
+      "example": "Thread.new do\n  (1..3).each{|i|\n    p i\n    Thread.pass\n  }\n  exit\nend\n\nloop do\n  Thread.pass\n  p :main\nend\n\n# =>\n1\n:main\n2\n:main\n3\n:main",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/Thread/s/pass.html"
     },
     {
@@ -21069,7 +21200,7 @@
       "signatures": [
         "list    -> [Thread]"
       ],
-      "description": "self に属するスレッドの配列を返します。\nversion 1.8 では、aborting 状態であるスレッドも要素に含まれます。つまり「生きている」スレッドの配列を返します。",
+      "description": "self に属するスレッドの配列を返します。\nRuby 1.8 では、aborting 状態であるスレッドも要素に含まれます。つまり「生きている」スレッドの配列を返します。",
       "example": "p ThreadGroup::Default.list # => [#<Thread:0x00007f8f13867078 run>]",
       "rurema_url": "https://docs.ruby-lang.org/ja/4.0/method/ThreadGroup/i/list.html"
     },
