@@ -1,0 +1,56 @@
+name: Update methods data
+
+on:
+  schedule:
+    - cron: "17 3 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-methods-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "4.0.5"
+          bundler-cache: true
+
+      - name: Build the BitClust database
+        run: ruby -S bundle exec bitclust setup --versions=4.0.0
+
+      - name: Generate methods.json
+        run: ruby -S bundle exec ruby scripts/generate_methods.rb
+
+      - name: Run tests
+        run: |
+          ruby -S bundle exec ruby -Itest test/generate_methods_test.rb
+          ruby -S bundle exec ruby -Itest test/generate_methods_integration_test.rb
+
+      - name: Check for methods.json changes
+        id: methods_json
+        run: |
+          if git diff --quiet -- docs/data/methods.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit updated methods.json
+        if: steps.methods_json.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- docs/data/methods.json
+          git commit -m "chore: update methods data"
+          git push

@@ -16,7 +16,11 @@ GEM
   specs:
     drb (2.2.3)
     json (2.21.2)
+    minitest (6.0.6)
+      drb (~> 2.0)
+      prism (~> 1.5)
     nkf (0.3.0)
+    prism (1.9.0)
     progressbar (1.13.0)
     rack (3.2.6)
     rouge (5.1.0)
@@ -30,12 +34,15 @@ PLATFORMS
 
 DEPENDENCIES
   bitclust-core!
+  minitest
 
 CHECKSUMS
   bitclust-core (1.6.1)
   drb (2.2.3) sha256=0b00d6fdb50995fe4a45dea13663493c841112e4068656854646f418fda13373
   json (2.21.2) sha256=1f1d3b7cf2b3ba1a69beca0bb6db13d5438b80bff3cd54cdaaa620b9b07c1c6a
+  minitest (6.0.6) sha256=153ea36d1d987a62942382b61075745042a2b3123b1cd48f4c3675af9cc7d6f1
   nkf (0.3.0) sha256=357a8dbeba38b727b75930f665146546076a394a1c243faf634ff176e3588895
+  prism (1.9.0) sha256=7b530c6a9f92c24300014919c9dcbc055bf4cdf51ec30aed099b06cd6674ef85
   progressbar (1.13.0) sha256=18c921d1c527dbe7eba3c5a07a1e3bcdd5e42fc18276f5711187a7489448be78
   rack (3.2.6) sha256=5ed78e1f73b2e25679bec7d45ee2d4483cc4146eb1be0264fc4d94cb5ef212c2
   rouge (5.1.0) sha256=b77c632842ab7f5147940212f0345808cccfbce864fd5b631d7d12a35ac85452
