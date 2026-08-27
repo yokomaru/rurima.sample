@@ -493,25 +493,6 @@ a { color: inherit; }
   padding: 18px 16px 10px;
 }
 
-.service-note {
-  padding: 16px;
-  border: 1px solid #263348;
-  border-radius: 10px;
-  color: #a5b0c3;
-  background: linear-gradient(140deg, rgb(16 24 39 / 76%), rgb(13 19 32 / 76%));
-  box-shadow: 0 0 20px rgb(63 117 179 / 8%);
-  font-family: ui-sans-serif, system-ui, sans-serif;
-  font-size: 0.76rem;
-  line-height: 1.75;
-}
-
-.service-note p { margin: 0; }
-.service-note p + p { margin-top: 14px; }
-.service-note em {
-  color: #ff5a8b;
-  font-style: normal;
-}
-
 .history-panel h2,
 .favorites-panel h2 {
   margin: 0;
@@ -622,8 +603,6 @@ a { color: inherit; }
   #favorite-button { top: 26px; right: 16px; }
   .history-panel,
   .favorites-panel { padding: 16px; }
-  .service-note { padding: 16px; }
-
 }
 
 @media (prefers-reduced-motion: reduce) {
