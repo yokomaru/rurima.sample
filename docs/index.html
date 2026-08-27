@@ -10,7 +10,14 @@
     <main class="app-shell">
       <header class="hero">
         <h1><span>Rurima.</span><strong>sample</strong></h1>
-        <p class="service-version">Ruby 4.0 💎</p>
+        <p class="service-description">Rubyリファレンスマニュアル（通称るりま）から、ランダムに1つのメソッドを表示します</p>
+        <div class="service-meta-container">
+          <p class="service-version">Ruby 4.0 ver 💎　最終更新 <time id="last-updated">初回更新前</time></p>
+          <button type="button" id="service-info-button" aria-expanded="false" aria-controls="service-info" aria-label="対象について表示する">ⓘ</button>
+          <div id="service-info" class="service-info" role="tooltip" hidden>
+            Ruby本体に組み込まれ、requireなしで使えるクラス・モジュールのメソッドから選ばれます。
+          </div>
+        </div>
         <button type="button" id="draw-button">▶　実行する</button>
       </header>
 

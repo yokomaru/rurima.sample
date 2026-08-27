@@ -1,5 +1,8 @@
 const response = await fetch("data/methods.json");
 const methodsData = await response.json();
+const updateStatus = await fetch("data/update-status.json")
+  .then((statusResponse) => statusResponse.ok ? statusResponse.json() : null)
+  .catch(() => null);
 
 const HISTORY_STORAGE_KEY = "rurima-gacha-history";
 const CLASS_SELECTION_STORAGE_KEY = "rurima-gacha-class-selection";
@@ -31,6 +34,9 @@ const openClassSelectorButton = document.querySelector("#open-class-selector");
 const closeClassSelectorButton = document.querySelector("#close-class-selector");
 const selectAllClassesButton = document.querySelector("#select-all-classes");
 const resetClassSelectionButton = document.querySelector("#reset-class-selection");
+const lastUpdated = document.querySelector("#last-updated");
+const serviceInfoButton = document.querySelector("#service-info-button");
+const serviceInfo = document.querySelector("#service-info");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const SAMPLING_DELAY = prefersReducedMotion ? 0 : 700;
 const RESULT_REVEAL_DELAY = prefersReducedMotion ? 0 : 300;
@@ -39,6 +45,25 @@ const selectableClassNames = classNamesForDisplay(methodsData.methods);
 let history = loadHistory();
 let isSampling = false;
 let selectedClassNames = loadClassSelection();
+
+function renderUpdateStatus() {
+  const updatedAt = updateStatus?.updated_at;
+  if (typeof updatedAt !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(updatedAt)) return;
+
+  lastUpdated.dateTime = updatedAt;
+  lastUpdated.textContent = updatedAt.replaceAll("-", ".");
+}
+
+function closeServiceInfo() {
+  serviceInfo.hidden = true;
+  serviceInfoButton.setAttribute("aria-expanded", "false");
+}
+
+function toggleServiceInfo() {
+  const isOpen = !serviceInfo.hidden;
+  serviceInfo.hidden = isOpen;
+  serviceInfoButton.setAttribute("aria-expanded", String(!isOpen));
+}
 
 function methodLabel(method) {
   const separator = method.method_kind === "instance_method" ? "#" : ".";
@@ -223,9 +248,17 @@ function executeSample() {
 
 renderClassSelection();
 renderHistory();
+renderUpdateStatus();
 drawButton.addEventListener("click", executeSample);
 toggleExample.addEventListener("click", toggleExampleVisibility);
 openClassSelectorButton.addEventListener("click", () => classSelectorDialog.showModal());
 closeClassSelectorButton.addEventListener("click", () => classSelectorDialog.close());
 selectAllClassesButton.addEventListener("click", selectAllClasses);
 resetClassSelectionButton.addEventListener("click", resetClassSelection);
+serviceInfoButton.addEventListener("click", toggleServiceInfo);
+document.addEventListener("click", (event) => {
+  if (!serviceInfo.hidden && !event.target.closest(".service-meta-container")) closeServiceInfo();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !serviceInfo.hidden) closeServiceInfo();
+});

@@ -66,10 +66,65 @@ a { color: inherit; }
 }
 
 .service-version {
-  margin: 12px 0 0;
+  margin: 8px 0 0;
   color: #d9deea;
   font-family: ui-sans-serif, system-ui, sans-serif;
-  font-size: 1rem;
+  font-size: 0.82rem;
+}
+
+.service-description {
+  margin: 18px 0 0;
+  color: #d9deea;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 0.95rem);
+  line-height: 1.6;
+}
+
+.service-meta-container {
+  position: relative;
+  display: flex;
+  width: fit-content;
+  margin: 0 auto;
+  align-items: center;
+}
+
+#service-info-button {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 8px 0 0 8px;
+  padding: 0;
+  border: 1px solid #a5b0c3;
+  border-radius: 50%;
+  color: #d9deea;
+  background: transparent;
+  font: inherit;
+  font-size: 0.78rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+#service-info-button:hover,
+#service-info-button[aria-expanded="true"] {
+  border-color: #42e8f5;
+  color: #42e8f5;
+}
+
+.service-info {
+  position: absolute;
+  z-index: 2;
+  top: calc(100% + 12px);
+  left: calc(100% + 12px);
+  width: min(280px, calc(100vw - 32px));
+  padding: 12px 14px;
+  border: 1px solid #43536f;
+  border-radius: 8px;
+  color: #d9deea;
+  background: #101827;
+  box-shadow: 0 12px 30px rgb(0 0 0 / 36%);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.7;
+  text-align: left;
 }
 
 #draw-button {
@@ -526,6 +581,11 @@ a { color: inherit; }
   .app-shell { padding: 32px 16px 24px; }
 
   .hero h1 { font-size: clamp(2.6rem, 14vw, 3.6rem); }
+
+  .service-info {
+    right: 0;
+    left: auto;
+  }
 
   #draw-button { width: 100%; min-width: 0; }
 
