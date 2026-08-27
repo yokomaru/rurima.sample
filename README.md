@@ -40,6 +40,12 @@ bundle exec ruby scripts/generate_methods.rb
 
 対象はRuby 4.0の `_builtin` にあるpublic methodです。使用例がないメソッドも含め、`example` は `null` になります。
 
+## データを自動更新する
+
+GitHub Actionsの`Update methods data`ワークフローが、毎週日曜日の12:00（日本時間）に`methods.json`を更新します。更新があった場合のみ、`methods.json`と更新日時を記録する`update-status.json`を自動コミットします。
+
+すぐに更新したい場合は、GitHubリポジトリの **Actions** から`Update methods data`を選び、**Run workflow**を実行してください。
+
 ## テストを実行する
 
 BitClust DBなしで実行できる単体テストです。
