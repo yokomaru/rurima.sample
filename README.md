@@ -1,8 +1,8 @@
-# Rurima.sample
+# Rurema.sample
 
 Rubyリファレンスマニュアル（るりま）から、Ruby本体に組み込まれたクラス・モジュールのメソッドをランダムに表示するWebサービスです。
 
-`Rurima.sample` を実行するたびに、説明・使用例・るりまへのリンクを表示します。直近3件の履歴はブラウザのlocalStorageに保存されます。
+`Rurema.sample` を実行するたびに、説明・使用例・るりまへのリンクを表示します。直近3件の履歴はブラウザのlocalStorageに保存されます。
 
 ※ 主な目的はCodexを使ったAgent AIでの実装の学習です
 

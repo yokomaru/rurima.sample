@@ -4,9 +4,9 @@ const updateStatus = await fetch("data/update-status.json")
   .then((statusResponse) => statusResponse.ok ? statusResponse.json() : null)
   .catch(() => null);
 
-const HISTORY_STORAGE_KEY = "rurima-gacha-history";
-const CLASS_SELECTION_STORAGE_KEY = "rurima-gacha-class-selection";
-const FAVORITES_STORAGE_KEY = "rurima-gacha-favorites";
+const HISTORY_STORAGE_KEY = "rurema-sample-history";
+const CLASS_SELECTION_STORAGE_KEY = "rurema-sample-class-selection";
+const FAVORITES_STORAGE_KEY = "rurema-sample-favorites";
 const HISTORY_LIMIT = 3;
 const FAVORITES_LIMIT = 5;
 const DEFAULT_SELECTED_CLASS_NAMES = ["Array", "Hash", "String", "Integer", "Float", "Symbol", "Range"];
