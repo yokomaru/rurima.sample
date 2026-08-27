@@ -35,8 +35,6 @@ const closeClassSelectorButton = document.querySelector("#close-class-selector")
 const selectAllClassesButton = document.querySelector("#select-all-classes");
 const resetClassSelectionButton = document.querySelector("#reset-class-selection");
 const lastUpdated = document.querySelector("#last-updated");
-const serviceInfoButton = document.querySelector("#service-info-button");
-const serviceInfo = document.querySelector("#service-info");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const SAMPLING_DELAY = prefersReducedMotion ? 0 : 700;
 const RESULT_REVEAL_DELAY = prefersReducedMotion ? 0 : 300;
@@ -52,17 +50,6 @@ function renderUpdateStatus() {
 
   lastUpdated.dateTime = updatedAt;
   lastUpdated.textContent = updatedAt.replaceAll("-", ".");
-}
-
-function closeServiceInfo() {
-  serviceInfo.hidden = true;
-  serviceInfoButton.setAttribute("aria-expanded", "false");
-}
-
-function toggleServiceInfo() {
-  const isOpen = !serviceInfo.hidden;
-  serviceInfo.hidden = isOpen;
-  serviceInfoButton.setAttribute("aria-expanded", String(!isOpen));
 }
 
 function methodLabel(method) {
@@ -255,10 +242,3 @@ openClassSelectorButton.addEventListener("click", () => classSelectorDialog.show
 closeClassSelectorButton.addEventListener("click", () => classSelectorDialog.close());
 selectAllClassesButton.addEventListener("click", selectAllClasses);
 resetClassSelectionButton.addEventListener("click", resetClassSelection);
-serviceInfoButton.addEventListener("click", toggleServiceInfo);
-document.addEventListener("click", (event) => {
-  if (!serviceInfo.hidden && !event.target.closest(".service-info-container")) closeServiceInfo();
-});
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !serviceInfo.hidden) closeServiceInfo();
-});
