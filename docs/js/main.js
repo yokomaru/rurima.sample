@@ -257,7 +257,7 @@ selectAllClassesButton.addEventListener("click", selectAllClasses);
 resetClassSelectionButton.addEventListener("click", resetClassSelection);
 serviceInfoButton.addEventListener("click", toggleServiceInfo);
 document.addEventListener("click", (event) => {
-  if (!serviceInfo.hidden && !event.target.closest(".service-meta-container")) closeServiceInfo();
+  if (!serviceInfo.hidden && !event.target.closest(".service-info-container")) closeServiceInfo();
 });
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && !serviceInfo.hidden) closeServiceInfo();

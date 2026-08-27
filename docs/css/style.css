@@ -72,14 +72,6 @@ a { color: inherit; }
   font-size: 0.82rem;
 }
 
-.service-description {
-  margin: 18px 0 0;
-  color: #d9deea;
-  font-family: ui-sans-serif, system-ui, sans-serif;
-  font-size: clamp(0.8rem, 2vw, 0.95rem);
-  line-height: 1.6;
-}
-
 .service-meta-container {
   position: relative;
   display: flex;
@@ -88,14 +80,26 @@ a { color: inherit; }
   align-items: center;
 }
 
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.service-info-container {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+}
+
 #service-info-button {
-  width: 1.5rem;
-  height: 1.5rem;
-  margin: 8px 0 0 8px;
-  padding: 0;
-  border: 1px solid #a5b0c3;
-  border-radius: 50%;
-  color: #d9deea;
+  margin: 6px 0 0;
+  padding: 4px 2px;
+  border: 0;
+  color: #a5b0c3;
   background: transparent;
   font: inherit;
   font-size: 0.78rem;
@@ -105,7 +109,6 @@ a { color: inherit; }
 
 #service-info-button:hover,
 #service-info-button[aria-expanded="true"] {
-  border-color: #42e8f5;
   color: #42e8f5;
 }
 
@@ -113,8 +116,8 @@ a { color: inherit; }
   position: absolute;
   z-index: 2;
   top: calc(100% + 12px);
-  left: calc(100% + 12px);
-  width: min(280px, calc(100vw - 32px));
+  left: 50%;
+  width: min(300px, calc(100vw - 32px));
   padding: 12px 14px;
   border: 1px solid #43536f;
   border-radius: 8px;
@@ -125,12 +128,18 @@ a { color: inherit; }
   font-size: 0.78rem;
   line-height: 1.7;
   text-align: left;
+  transform: translateX(-50%);
 }
+
+.service-info p { margin: 0; }
+.service-info p + p { margin-top: 10px; }
+.service-info-title { color: #42e8f5; }
+.service-info-version { color: #c879ff; }
 
 #draw-button {
   min-width: min(100%, 360px);
   height: 54px;
-  margin-top: 20px;
+  margin: 0;
   padding: 0 28px;
   border: 1px solid #ff3f78;
   border-radius: 8px;
@@ -581,11 +590,6 @@ a { color: inherit; }
   .app-shell { padding: 32px 16px 24px; }
 
   .hero h1 { font-size: clamp(2.6rem, 14vw, 3.6rem); }
-
-  .service-info {
-    right: 0;
-    left: auto;
-  }
 
   #draw-button { width: 100%; min-width: 0; }
 

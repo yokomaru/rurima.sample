@@ -10,15 +10,21 @@
     <main class="app-shell">
       <header class="hero">
         <h1><span>Rurima.</span><strong>sample</strong></h1>
-        <p class="service-description">Rubyリファレンスマニュアル（通称るりま）から、ランダムに1つのメソッドを表示します</p>
         <div class="service-meta-container">
           <p class="service-version">Ruby 4.0 ver 💎　最終更新 <time id="last-updated">初回更新前</time></p>
-          <button type="button" id="service-info-button" aria-expanded="false" aria-controls="service-info" aria-label="対象について表示する">ⓘ</button>
+        </div>
+        <div class="service-info-container">
+          <button type="button" id="service-info-button" aria-expanded="false" aria-controls="service-info">ⓘ　Rurima.sampleとは？</button>
           <div id="service-info" class="service-info" role="tooltip" hidden>
-            Ruby本体に組み込まれ、requireなしで使えるクラス・モジュールのメソッドから選ばれます。
+            <p class="service-info-title">Rurima.sampleとは？</p>
+            <p>Rubyリファレンスマニュアル（通称るりま）から、ランダムに1つのメソッドを表示します。</p>
+            <p>Ruby本体に組み込まれ、requireなしで使えるクラス・モジュールのメソッドから選ばれます。</p>
+            <p class="service-info-version">対象Ruby: 4.0</p>
           </div>
         </div>
-        <button type="button" id="draw-button">▶　実行する</button>
+        <div class="hero-actions">
+          <button type="button" id="draw-button">▶　実行する</button>
+        </div>
       </header>
 
       <section class="class-selector" aria-labelledby="class-selector-title">
