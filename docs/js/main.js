@@ -37,6 +37,7 @@ const classSelectorDialog = document.querySelector("#class-selector-dialog");
 const openClassSelectorButton = document.querySelector("#open-class-selector");
 const closeClassSelectorButton = document.querySelector("#close-class-selector");
 const selectAllClassesButton = document.querySelector("#select-all-classes");
+const clearClassSelectionButton = document.querySelector("#clear-class-selection");
 const resetClassSelectionButton = document.querySelector("#reset-class-selection");
 const lastUpdated = document.querySelector("#last-updated");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -125,6 +126,12 @@ function toggleClassSelection(className) {
 
 function selectAllClasses() {
   selectedClassNames = new Set(selectableClassNames);
+  saveClassSelection();
+  renderClassSelection();
+}
+
+function clearClassSelection() {
+  selectedClassNames = new Set();
   saveClassSelection();
   renderClassSelection();
 }
@@ -319,4 +326,5 @@ classSelectorDialog.addEventListener("click", (event) => {
   if (event.target === classSelectorDialog) classSelectorDialog.close();
 });
 selectAllClassesButton.addEventListener("click", selectAllClasses);
+clearClassSelectionButton.addEventListener("click", clearClassSelection);
 resetClassSelectionButton.addEventListener("click", resetClassSelection);
