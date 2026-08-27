@@ -315,5 +315,8 @@ toggleExample.addEventListener("click", toggleExampleVisibility);
 favoriteButton.addEventListener("click", toggleFavorite);
 openClassSelectorButton.addEventListener("click", () => classSelectorDialog.showModal());
 closeClassSelectorButton.addEventListener("click", () => classSelectorDialog.close());
+classSelectorDialog.addEventListener("click", (event) => {
+  if (event.target === classSelectorDialog) classSelectorDialog.close();
+});
 selectAllClassesButton.addEventListener("click", selectAllClasses);
 resetClassSelectionButton.addEventListener("click", resetClassSelection);
